@@ -93,25 +93,25 @@ class IPv6(Protocol):  # IETF RFC 2460 / 8200
 
 class ARP(Protocol):  # IETF RFC 826
     _fields_ = [
-        ("htype", c_uint16),  # Hardware type
-        ("ptype", c_uint16),  # Protocol type
-        ("hlen", c_uint8),    # Hardware length
-        ("plen", c_uint8),    # Protocol length
-        ("oper", c_uint16),   # Operation
-        ("sha", c_char * 6),  # Sender hardware address
-        ("spa", c_char * 4),  # Sender protocol address
-        ("tha", c_char * 6),  # Target hardware address
-        ("tpa", c_char * 4),  # Target protocol address
+        ("htype", c_uint16),   # Hardware type
+        ("ptype", c_uint16),   # Protocol type
+        ("hlen", c_uint8),     # Hardware length
+        ("plen", c_uint8),     # Protocol length
+        ("oper", c_uint16),    # Operation
+        ("sha", c_ubyte * 6),  # Sender hardware address
+        ("spa", c_ubyte * 4),  # Sender protocol address
+        ("tha", c_ubyte * 6),  # Target hardware address
+        ("tpa", c_ubyte * 4),  # Target protocol address
     ]
     header_len = 28
 
     def __init__(self, packet: bytes = None):
         super().__init__(packet)
         self.protocol = self.hex_format(self.ptype, 6)
-        self.source_hdwr = self.sha.hex(':')
-        self.target_hdwr = self.tha.hex(':')
-        self.source_proto = inet_ntop(AF_INET, self.spa)
-        self.target_proto = inet_ntop(AF_INET, self.tpa)
+        self.source_hdwr = bytes(self.sha).hex(':')
+        self.target_hdwr = bytes(self.tha).hex(':')
+        self.source_proto = inet_ntop(AF_INET, bytes(self.spa))
+        self.target_proto = inet_ntop(AF_INET, bytes(self.tpa))
 
 
 class TCP(Protocol):  # IETF RFC 675
