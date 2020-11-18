@@ -66,7 +66,7 @@ class IPv4(Protocol):  # IETF 791
     header_len = 20
 
     def __init__(self, packet: bytes = None):
-        super().__init__()
+        super().__init__(packet)
         self.source = inet_ntop(AF_INET, self.src)
         self.dest = inet_ntop(AF_INET, self.dst)
         try:
@@ -89,7 +89,7 @@ class IPv6(Protocol):  # IETF RFC 2460 / 8200
     header_len = 40
 
     def __init__(self, packet: bytes = None):
-        super().__init__()
+        super().__init__(packet)
         self.source = inet_ntop(AF_INET6, self.src)
         self.dest = inet_ntop(AF_INET6, self.dst)
 
@@ -109,7 +109,7 @@ class ARP(Protocol):  # IETF RFC 826
     header_len = 28
 
     def __init__(self, packet: bytes = None):
-        super().__init__()
+        super().__init__(packet)
         self.protocol = self.hex_format(self.ptype, 6)
         self.source_hdwr = self.sha.hex(':')
         self.target_hdwr = self.tha.hex(':')
@@ -133,7 +133,7 @@ class TCP(Protocol):  # IETF RFC 675
     header_len = 32
 
     def __init__(self, packet: bytes = None):
-        super().__init__()
+        super().__init__(packet)
         self.flag_hex = self.hex_format(self.flags, 5)
         self.flag_txt = self.translate_flags()
 
@@ -154,7 +154,7 @@ class UDP(Protocol):  # IETF RFC 768
     header_len = 8
 
     def __init__(self, packet: bytes = None):
-        super().__init__()
+        super().__init__(packet)
 
 
 class ICMP(Protocol):  # IETF RFC 792
@@ -169,7 +169,7 @@ class ICMP(Protocol):  # IETF RFC 792
     icmp_types = {0: 'REPLY', 8: 'REQUEST'}
 
     def __init__(self, packet: bytes = None):
-        super().__init__()
+        super().__init__(packet)
         try:
             self.type_txt = self.icmp_types[self.type]
         except KeyError:
