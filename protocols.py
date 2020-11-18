@@ -4,7 +4,6 @@
 __author__ = 'EONRaider @ keybase.io/eonraider'
 
 
-import re
 from ctypes import *
 from socket import inet_ntop, AF_INET, AF_INET6
 
@@ -21,10 +20,6 @@ class Protocol(BigEndianStructure):
 
     def __str__(self):
         return create_string_buffer(sizeof(self))[:]
-
-    @staticmethod
-    def hardware_to_hex(mac: str) -> bytes:
-        return b''.join(bytes.fromhex(octet) for octet in re.split('[:-]', mac))
 
     @staticmethod
     def hex_format(hex_value, str_len: int):
