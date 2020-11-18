@@ -28,17 +28,17 @@ class Protocol(BigEndianStructure):
 
 class Ethernet(Protocol):  # IEEE 802.3 standard
     _fields_ = [
-        ('dst', c_char * 6),  # Destination hardware address
-        ('src', c_char * 6),  # Source hardware address
-        ('eth', c_uint16)     # Ethertype
+        ('dst', c_ubyte * 6),  # Destination hardware address
+        ('src', c_ubyte * 6),  # Source hardware address
+        ('eth', c_uint16)      # Ethertype
     ]
     ethertypes = {'0x0806': 'ARP', '0x0800': 'IPv4', '0x86dd': 'IPv6'}
     header_len = 14
 
     def __init__(self, packet: bytes = None):
         super().__init__(packet)
-        self.dest = self.dst.hex(':')
-        self.source = self.src.hex(':')
+        self.dest = bytes(self.dst).hex(':')
+        self.source = bytes(self.src).hex(':')
         self.ethertype = self.hex_format(self.eth, 6)
         self.encapsulated_proto = self.ethertypes[self.ethertype]
 
