@@ -31,7 +31,7 @@ class Protocol(BigEndianStructure):
         return format(hex_value, '#0{}x'.format(str_len))
 
 
-class Ethernet(Protocol):
+class Ethernet(Protocol):  # IEEE 802.3 standard
     _fields_ = [
         ('dst', c_char * 6),
         ('src', c_char * 6),
@@ -48,7 +48,7 @@ class Ethernet(Protocol):
         self.encapsulated_proto = self.ethertypes[self.ethertype]
 
 
-class IPv4(Protocol):
+class IPv4(Protocol):  # IETF 791
     _fields_ = [
         ("version", c_uint8, 4),
         ("ihl", c_uint8, 4),
@@ -75,7 +75,7 @@ class IPv4(Protocol):
             self.encapsulated_proto = None
 
 
-class IPv6(Protocol):
+class IPv6(Protocol):  # IETF RFC 2460 / 8200
     _fields_ = [
         ("vtfl", c_uint32),
         ("payload_len", c_uint16),
@@ -92,7 +92,7 @@ class IPv6(Protocol):
         self.dest = inet_ntop(AF_INET6, self.dst)
 
 
-class ARP(Protocol):
+class ARP(Protocol):  # IETF RFC 826
     _fields_ = [
         ("htype", c_uint16),
         ("ptype", c_uint16),
@@ -115,7 +115,7 @@ class ARP(Protocol):
         self.target_proto = inet_ntop(AF_INET, self.tpa)
 
 
-class TCP(Protocol):
+class TCP(Protocol):  # IETF RFC 675
     _fields_ = [
         ("sport", c_uint16),
         ("dport", c_uint16),
@@ -142,7 +142,7 @@ class TCP(Protocol):
                             zip(f_names, f_bits) if flag_bit == '1')
 
 
-class UDP(Protocol):
+class UDP(Protocol):  # IETF RFC 768
     _fields_ = [
         ("sport", c_uint16),
         ("dport", c_uint16),
@@ -155,7 +155,7 @@ class UDP(Protocol):
         super().__init__()
 
 
-class ICMP(Protocol):
+class ICMP(Protocol):  # IETF RFC 792
     _fields_ = [
         ("type", c_uint8),
         ("code", c_uint8),
