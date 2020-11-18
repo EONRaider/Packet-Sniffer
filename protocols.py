@@ -33,9 +33,9 @@ class Protocol(BigEndianStructure):
 
 class Ethernet(Protocol):  # IEEE 802.3 standard
     _fields_ = [
-        ('dst', c_char * 6),
-        ('src', c_char * 6),
-        ('eth', c_uint16)
+        ('dst', c_char * 6),  # Destination hardware address
+        ('src', c_char * 6),  # Source hardware address
+        ('eth', c_uint16)     # Ethertype
     ]
     ethertypes = {'0x0806': 'ARP', '0x0800': 'IPv4', '0x86dd': 'IPv6'}
     header_len = 14
@@ -50,17 +50,19 @@ class Ethernet(Protocol):  # IEEE 802.3 standard
 
 class IPv4(Protocol):  # IETF 791
     _fields_ = [
-        ("version", c_uint8, 4),
-        ("ihl", c_uint8, 4),
-        ("tos", c_uint8),
-        ("len", c_uint16),
-        ("id", c_uint16),
-        ("offset", c_uint16),
-        ("ttl", c_uint8),
-        ("proto", c_uint8),
-        ("sum", c_uint16),
-        ("src", c_ubyte * 4),
-        ("dst", c_ubyte * 4)
+        ("version", c_uint8, 4),   # Protocol version
+        ("ihl", c_uint8, 4),       # Internet header length
+        ("dscp", c_uint8, 6),      # Differentiated services code point
+        ("ecp", c_uint8, 2),       # Explicit congestion notification
+        ("len", c_uint16),         # Total packet length
+        ("id", c_uint16),          # Identification
+        ("flags", c_uint16, 3),    # Fragment offset
+        ("offset", c_uint16, 13),  # Fragment offset
+        ("ttl", c_uint8),          # Time to live
+        ("proto", c_uint8),        # Encapsulated protocol
+        ("chksum", c_uint16),      # Header checksum
+        ("src", c_ubyte * 4),      # Source address
+        ("dst", c_ubyte * 4)       # Destination address
     ]
     proto_numbers = {1: 'ICMP', 6: 'TCP', 17: 'UDP'}
     header_len = 20
@@ -77,14 +79,14 @@ class IPv4(Protocol):  # IETF 791
 
 class IPv6(Protocol):  # IETF RFC 2460 / 8200
     _fields_ = [
-        ("version", c_uint32, 4),
-        ("traffic_class", c_uint32, 8),
-        ("flow_label", c_uint32, 20),
-        ("payload_len", c_uint16),
-        ("next_header", c_uint8),
-        ("hop_limit", c_uint8),
-        ("src", c_ubyte * 16),
-        ("dst", c_ubyte * 16)
+        ("version", c_uint32, 4),   # Protocol version
+        ("tclass", c_uint32, 8),    # Traffic class
+        ("flabel", c_uint32, 20),   # Flow label
+        ("payload_len", c_uint16),  # Payload length
+        ("next_header", c_uint8),   # Type of next header
+        ("hop_limit", c_uint8),     # Hop limit (replaces IPv4 TTL)
+        ("src", c_ubyte * 16),      # Source address
+        ("dst", c_ubyte * 16)       # Destination address
     ]
     header_len = 40
 
@@ -96,15 +98,15 @@ class IPv6(Protocol):  # IETF RFC 2460 / 8200
 
 class ARP(Protocol):  # IETF RFC 826
     _fields_ = [
-        ("htype", c_uint16),
-        ("ptype", c_uint16),
-        ("hlen", c_uint8),
-        ("plen", c_uint8),
-        ("oper", c_uint16),
-        ("sha", c_char * 6),
-        ("spa", c_char * 4),
-        ("tha", c_char * 6),
-        ("tpa", c_char * 4),
+        ("htype", c_uint16),  # Hardware type
+        ("ptype", c_uint16),  # Protocol type
+        ("hlen", c_uint8),    # Hardware length
+        ("plen", c_uint8),    # Protocol length
+        ("oper", c_uint16),   # Operation
+        ("sha", c_char * 6),  # Sender hardware address
+        ("spa", c_char * 4),  # Sender protocol address
+        ("tha", c_char * 6),  # Target hardware address
+        ("tpa", c_char * 4),  # Target protocol address
     ]
     header_len = 28
 
@@ -119,16 +121,16 @@ class ARP(Protocol):  # IETF RFC 826
 
 class TCP(Protocol):  # IETF RFC 675
     _fields_ = [
-        ("sport", c_uint16),
-        ("dport", c_uint16),
-        ("seq", c_uint32),
-        ("ack", c_uint32),
-        ("offset", c_uint16, 4),
-        ("reserved", c_uint16, 3),
-        ("flags", c_uint16, 9),
-        ("window", c_uint16),
-        ("chksum", c_uint16),
-        ("urg", c_uint16),
+        ("sport", c_uint16),        # Source port
+        ("dport", c_uint16),        # Destination port
+        ("seq", c_uint32),          # Sequence number
+        ("ack", c_uint32),          # Acknowledgement number
+        ("offset", c_uint16, 4),    # Data offset
+        ("reserved", c_uint16, 3),  # Reserved field
+        ("flags", c_uint16, 9),     # TCP flag codes
+        ("window", c_uint16),       # Size of the receive window
+        ("chksum", c_uint16),       # TCP header checksum
+        ("urg", c_uint16),          # Urgent pointer
     ]
     header_len = 32
 
@@ -146,10 +148,10 @@ class TCP(Protocol):  # IETF RFC 675
 
 class UDP(Protocol):  # IETF RFC 768
     _fields_ = [
-        ("sport", c_uint16),
-        ("dport", c_uint16),
-        ("len", c_uint16),
-        ("chksum", c_uint16)
+        ("sport", c_uint16),  # Source port
+        ("dport", c_uint16),  # Destination port
+        ("len", c_uint16),    # Header length
+        ("chksum", c_uint16)  # Header checksum
     ]
     header_len = 8
 
@@ -159,11 +161,10 @@ class UDP(Protocol):  # IETF RFC 768
 
 class ICMP(Protocol):  # IETF RFC 792
     _fields_ = [
-        ("type", c_uint8),
-        ("code", c_uint8),
-        ("chksum", c_uint16),
-        ("id", c_uint16),
-        ("seq", c_uint16)
+        ("type", c_uint8),      # Control message type
+        ("code", c_uint8),      # Control message subtype
+        ("chksum", c_uint16),   # Header checksum
+        ("rest", c_ubyte * 4)   # Rest of header (contents vary)
     ]
     header_len = 8
     icmp_types = {0: 'REPLY', 8: 'REQUEST'}
