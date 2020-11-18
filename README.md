@@ -1,8 +1,11 @@
-# Low-level Network Packet Sniffer
+# Python 3 Network Packet Sniffer
 
 A simple pure-Python network packet sniffer. Packets are disassembled 
 as they arrive at a given network interface controller and their information 
 is displayed on screen.
+
+This application maintains no dependencies on third-party modules and can be 
+run by any Python 3.x interpreter.
 
 ## Installation
 
