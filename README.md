@@ -53,22 +53,6 @@ to learn, inspire, and create. Any contributions you make are greatly appreciate
 4. Push to the Branch (`git push origin featurebranch/Feature`)
 5. Open a Pull Request
 
-## License
-Contact information and PGP keys at keybase.io/eonraider
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, check the [LICENSE](https://github.com/EONRaider/ssh-shell-commands/blob/master/LICENSE) file.
-
 ## Legal Disclaimer
 The use of code contained in this repository, either in part or in its totality, 
 for engaging targets without prior mutual consent is illegal. **It is 
