@@ -39,22 +39,19 @@ class PacketSniffer(object):
             if self.interface is not None:
                 sock.bind((self.interface, 0))
             for self.packet_num in count(1):
-                try:
-                    self.raw_packet = sock.recvfrom(2048)[0]
-                    start: int = 0
-                    for proto in self.protocol_queue:
-                        proto_class = getattr(protocols, proto)
-                        end: int = start + proto_class.header_len
-                        protocol = proto_class(self.raw_packet[start:end])
-                        setattr(self, proto.lower(), protocol)
-                        if protocol.encapsulated_proto is None:
-                            break
-                        self.protocol_queue.append(protocol.encapsulated_proto)
-                        start = end
-                    self.data = self.raw_packet[end:]
-                    self.__notify_all(self)
-                except KeyboardInterrupt:
-                    raise SystemExit('Aborting packet capture...')
+                self.raw_packet = sock.recvfrom(2048)[0]
+                start: int = 0
+                for proto in self.protocol_queue:
+                    proto_class = getattr(protocols, proto)
+                    end: int = start + proto_class.header_len
+                    protocol = proto_class(self.raw_packet[start:end])
+                    setattr(self, proto.lower(), protocol)
+                    if protocol.encapsulated_proto is None:
+                        break
+                    self.protocol_queue.append(protocol.encapsulated_proto)
+                    start = end
+                self.data = self.raw_packet[end:]
+                self.__notify_all(self)
 
 
 class OutputMethod(abc.ABC):
@@ -71,8 +68,6 @@ class SniffToScreen(OutputMethod):
         super().__init__(subject)
         self.p = None
         self.display_data = display_data
-        print('\n[>>>] Sniffer initialized. Waiting for incoming packets. '
-              'Press Ctrl-C to abort...\n')
 
     def update(self, packet):
         self.p = packet
@@ -136,7 +131,12 @@ def sniff(args):
     packet_sniffer = PacketSniffer(args.interface)
     to_screen = SniffToScreen(subject=packet_sniffer,
                               display_data=args.displaydata)
-    packet_sniffer.execute()
+    try:
+        print('\n[>>>] Sniffer initialized. Waiting for incoming packets. '
+              'Press Ctrl-C to abort...\n')
+        packet_sniffer.execute()
+    except KeyboardInterrupt:
+        raise SystemExit('Aborting packet capture...')
 
 
 if __name__ == '__main__':
