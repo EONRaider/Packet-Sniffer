@@ -77,7 +77,9 @@ class IPv4(Protocol):  # IETF 791
 
 class IPv6(Protocol):  # IETF RFC 2460 / 8200
     _fields_ = [
-        ("vtfl", c_uint32),
+        ("version", c_uint32, 4),
+        ("traffic_class", c_uint32, 8),
+        ("flow_label", c_uint32, 20),
         ("payload_len", c_uint16),
         ("next_header", c_uint8),
         ("hop_limit", c_uint8),
