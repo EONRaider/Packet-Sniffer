@@ -32,8 +32,8 @@ class Ethernet(Protocol):  # IEEE 802.3 standard
         ('src', c_ubyte * 6),  # Source hardware address
         ('eth', c_uint16)      # Ethertype
     ]
-    ethertypes = {'0x0806': 'ARP', '0x0800': 'IPv4', '0x86dd': 'IPv6'}
     header_len = 14
+    ethertypes = {'0x0806': 'ARP', '0x0800': 'IPv4', '0x86dd': 'IPv6'}
 
     def __init__(self, packet: bytes = None):
         super().__init__(packet)
@@ -43,7 +43,7 @@ class Ethernet(Protocol):  # IEEE 802.3 standard
         self.encapsulated_proto = self.ethertypes[self.ethertype]
 
 
-class IPv4(Protocol):  # IETF 791
+class IPv4(Protocol):  # IETF RFC 791
     _fields_ = [
         ("version", c_uint8, 4),   # Protocol version
         ("ihl", c_uint8, 4),       # Internet header length
@@ -59,8 +59,8 @@ class IPv4(Protocol):  # IETF 791
         ("src", c_ubyte * 4),      # Source address
         ("dst", c_ubyte * 4)       # Destination address
     ]
-    proto_numbers = {1: 'ICMP', 6: 'TCP', 17: 'UDP'}
     header_len = 20
+    proto_numbers = {1: 'ICMP', 6: 'TCP', 17: 'UDP'}
 
     def __init__(self, packet: bytes = None):
         super().__init__(packet)
