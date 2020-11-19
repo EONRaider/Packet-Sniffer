@@ -47,15 +47,6 @@ optional arguments:
     [+] ARP ...........192.168.1.65 -> Is at ae:45:39:30:8f:5a
 ```
 
-## Contributing
-Contributions are what make the open source community such an amazing place 
-to learn, inspire, and create. Any contributions you make are greatly appreciated.
-1. Fork this Project
-2. Create your Feature Branch (`git checkout -b featurebranch/Feature`)
-3. Commit your Changes (`git commit -m 'Add some Feature'`)
-4. Push to the Branch (`git push origin featurebranch/Feature`)
-5. Open a Pull Request
-
 ## Legal Disclaimer
 The use of code contained in this repository, either in part or in its totality, 
 for engaging targets without prior mutual consent is illegal. **It is 
