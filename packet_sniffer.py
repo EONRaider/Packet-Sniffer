@@ -3,10 +3,6 @@
 
 __author__ = 'EONRaider @ keybase.io/eonraider'
 
-"""
-A low-level network packet sniffer.
-"""
-
 import abc
 import argparse
 import time
@@ -55,6 +51,10 @@ class PacketSniffer(object):
 
 
 class OutputMethod(abc.ABC):
+    """Interface for the implementation of all classes responsible for
+    further processing and/or output of the information gathered by
+    the subject class."""
+
     def __init__(self, subject):
         subject.register(self)
 
@@ -127,7 +127,8 @@ class SniffToScreen(OutputMethod):
 
 
 def sniff(args):
-    """Controls the flow of execution of the Packet Sniffer tool."""
+    """Control the flow of execution of the Packet Sniffer tool."""
+
     packet_sniffer = PacketSniffer(args.interface)
     to_screen = SniffToScreen(subject=packet_sniffer,
                               display_data=args.displaydata)
