@@ -26,7 +26,7 @@ user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 ```
 packet_sniffer.py [-h] [-i INTERFACE] [-d]
 
-A low-level network packet sniffer.
+A pure-Python network packet sniffer.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -37,7 +37,7 @@ optional arguments:
 ```
 
 ## Running the Application
-- Execute the following command with administrative privileges in order to 
+- Execute the following command with administrative privileges to 
 initiate the capture of packets on all available interfaces: 
 
   `user@host:~$ sudo python3 packet_sniffer.py`
