@@ -64,7 +64,7 @@ class IPv4(Protocol):              # IETF RFC 791
         ("ecp", c_uint8, 2),       # Explicit congestion notification
         ("len", c_uint16),         # Total packet length
         ("id", c_uint16),          # Identification
-        ("flags", c_uint16, 3),    # Fragment offset
+        ("flags", c_uint16, 3),    # Fragmentation control flags
         ("offset", c_uint16, 13),  # Fragment offset
         ("ttl", c_uint8),          # Time to live
         ("proto", c_uint8),        # Encapsulated protocol
@@ -178,4 +178,4 @@ class ICMP(Protocol):           # IETF RFC 792
     def __init__(self, packet: bytes = None):
         super().__init__(packet)
         # Limit implementation to ICMP ECHO
-        self.type_txt = self.icmp_types.get(self.type)
+        self.type_txt = self.icmp_types.get(self.type, 'OTHER')
