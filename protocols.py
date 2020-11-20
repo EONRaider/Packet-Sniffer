@@ -79,10 +79,8 @@ class IPv4(Protocol):              # IETF RFC 791
         super().__init__(packet)
         self.source = inet_ntop(AF_INET, self.src)
         self.dest = inet_ntop(AF_INET, self.dst)
-        try:
-            self.encapsulated_proto = self.proto_numbers[self.proto]
-        except KeyError:  # Limit implementation to common protocols
-            self.encapsulated_proto = None
+        # Limit implementation to common protocols
+        self.encapsulated_proto = self.proto_numbers.get(self.proto)
 
 
 class IPv6(Protocol):               # IETF RFC 2460 / 8200
@@ -179,7 +177,5 @@ class ICMP(Protocol):           # IETF RFC 792
 
     def __init__(self, packet: bytes = None):
         super().__init__(packet)
-        try:
-            self.type_txt = self.icmp_types[self.type]
-        except KeyError:
-            self.type_txt = 'OTHER'  # Limit implementation to ICMP ECHO
+        # Limit implementation to ICMP ECHO
+        self.type_txt = self.icmp_types.get(self.type)
