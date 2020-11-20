@@ -37,11 +37,11 @@ class PacketSniffer(object):
             for self.packet_num in count(1):
                 self.raw_packet = sock.recvfrom(2048)[0]
                 start: int = 0
-                for proto in self.protocol_queue:
-                    proto_class = getattr(protocols, proto)
-                    end: int = start + proto_class.header_len
-                    protocol = proto_class(self.raw_packet[start:end])
-                    setattr(self, proto.lower(), protocol)
+                for protocol in self.protocol_queue:
+                    protocol_class = getattr(protocols, protocol)
+                    end: int = start + protocol_class.header_len
+                    protocol = protocol_class(self.raw_packet[start:end])
+                    setattr(self, protocol.lower(), protocol)
                     if protocol.encapsulated_proto is None:
                         break
                     self.protocol_queue.append(protocol.encapsulated_proto)
@@ -141,7 +141,7 @@ def sniff(args):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='A low-level network packet '
+    parser = argparse.ArgumentParser(description='A pure-Python network packet '
                                                  'sniffer.')
     parser.add_argument('-i', '--interface', type=str, default=None,
                         help='Interface from which packets will be captured '
