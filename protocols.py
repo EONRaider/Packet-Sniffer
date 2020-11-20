@@ -22,7 +22,20 @@ class Protocol(BigEndianStructure):
         return create_string_buffer(sizeof(self))[:]
 
     @staticmethod
+    def addr_array_2_hdwr(addr):
+        """
+        Converts a c_ubyte array of 6 bytes to IEEE 802 MAC address.
+        Ex: From b'\xceP\x9a\xcc\x8c\x9d' to 'ce:50:9a:cc:8c:9d'
+        """
+        return ':'.join('{:02x}'.format(octet) for octet in bytes(addr))
+
+    @staticmethod
     def hex_format(hex_value, str_len: int):
+        """
+        Fills a hex value with zeroes to the left for compliance with
+        the presentation of codes used in Internet protocols.
+        Ex: From '0x800' to '0x0800'
+        """
         return format(hex_value, '#0{}x'.format(str_len))
 
 
@@ -37,8 +50,8 @@ class Ethernet(Protocol):      # IEEE 802.3 standard
 
     def __init__(self, packet: bytes = None):
         super().__init__(packet)
-        self.dest = bytes(self.dst).hex(':')
-        self.source = bytes(self.src).hex(':')
+        self.dest = self.addr_array_2_hdwr(self.dst)
+        self.source = self.addr_array_2_hdwr(self.src)
         self.ethertype = self.hex_format(self.eth, 6)
         self.encapsulated_proto = self.ethertypes[self.ethertype]
 
@@ -108,8 +121,8 @@ class ARP(Protocol):           # IETF RFC 826
     def __init__(self, packet: bytes = None):
         super().__init__(packet)
         self.protocol = self.hex_format(self.ptype, 6)
-        self.source_hdwr = bytes(self.sha).hex(':')
-        self.target_hdwr = bytes(self.tha).hex(':')
+        self.source_hdwr = self.addr_array_2_hdwr(self.sha)
+        self.target_hdwr = self.addr_array_2_hdwr(self.tha)
         self.source_proto = inet_ntop(AF_INET, bytes(self.spa))
         self.target_proto = inet_ntop(AF_INET, bytes(self.tpa))
 
