@@ -26,7 +26,7 @@ class Protocol(BigEndianStructure):
         return format(hex_value, '#0{}x'.format(str_len))
 
 
-class Ethernet(Protocol):  # IEEE 802.3 standard
+class Ethernet(Protocol):      # IEEE 802.3 standard
     _fields_ = [
         ('dst', c_ubyte * 6),  # Destination hardware address
         ('src', c_ubyte * 6),  # Source hardware address
@@ -43,7 +43,7 @@ class Ethernet(Protocol):  # IEEE 802.3 standard
         self.encapsulated_proto = self.ethertypes[self.ethertype]
 
 
-class IPv4(Protocol):  # IETF RFC 791
+class IPv4(Protocol):              # IETF RFC 791
     _fields_ = [
         ("version", c_uint8, 4),   # Protocol version
         ("ihl", c_uint8, 4),       # Internet header length
@@ -72,7 +72,7 @@ class IPv4(Protocol):  # IETF RFC 791
             self.encapsulated_proto = None
 
 
-class IPv6(Protocol):  # IETF RFC 2460 / 8200
+class IPv6(Protocol):               # IETF RFC 2460 / 8200
     _fields_ = [
         ("version", c_uint32, 4),   # Protocol version
         ("tclass", c_uint32, 8),    # Traffic class
@@ -91,7 +91,7 @@ class IPv6(Protocol):  # IETF RFC 2460 / 8200
         self.dest = inet_ntop(AF_INET6, self.dst)
 
 
-class ARP(Protocol):  # IETF RFC 826
+class ARP(Protocol):           # IETF RFC 826
     _fields_ = [
         ("htype", c_uint16),   # Hardware type
         ("ptype", c_uint16),   # Protocol type
@@ -114,7 +114,7 @@ class ARP(Protocol):  # IETF RFC 826
         self.target_proto = inet_ntop(AF_INET, bytes(self.tpa))
 
 
-class TCP(Protocol):  # IETF RFC 675
+class TCP(Protocol):                # IETF RFC 675
     _fields_ = [
         ("sport", c_uint16),        # Source port
         ("dport", c_uint16),        # Destination port
@@ -141,7 +141,7 @@ class TCP(Protocol):  # IETF RFC 675
                             zip(f_names, f_bits) if flag_bit == '1')
 
 
-class UDP(Protocol):  # IETF RFC 768
+class UDP(Protocol):          # IETF RFC 768
     _fields_ = [
         ("sport", c_uint16),  # Source port
         ("dport", c_uint16),  # Destination port
@@ -154,7 +154,7 @@ class UDP(Protocol):  # IETF RFC 768
         super().__init__(packet)
 
 
-class ICMP(Protocol):  # IETF RFC 792
+class ICMP(Protocol):           # IETF RFC 792
     _fields_ = [
         ("type", c_uint8),      # Control message type
         ("code", c_uint8),      # Control message subtype
