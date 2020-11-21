@@ -16,14 +16,39 @@ run by any Python 3.x interpreter.
 
 ## Installation
 
+### GNU / Linux
+
 Simply clone this repository with `git clone` and execute the `packet_sniffer.py` file 
 as described in the following **Usage** section.
+
 ```
 user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 ```
 
-## Usage
+### Other Systems
+
+This project is dependent on PF_PACKET, a stateful packet filter not typically
+found on Windows or OS X. For demonstration purposes, look to the
+`containerized` branch, which includes a Dockerfile that will allow you
+try out this project.
+
+Use this command to build and run from the project directory:
+
 ```
+docker build -t sniff . && docker run --network host sniff
+```
+
+Note that the entry command is simply `python packet_sniffer.py`, so feel
+free to use the full functionality of the module by overriding the default
+command. Remember, we tagged the container with the name "sniff" before.
+
+```
+docker run --network host sniff [your command goes here]
+echo "Now let's print help"
+docker run --network host sniff python packet_sniffer.py --help
+```
+
+## Usage ```
 packet_sniffer.py [-h] [-i INTERFACE] [-d]
 
 A pure-Python network packet sniffer.
