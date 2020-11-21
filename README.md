@@ -22,6 +22,19 @@ as described in the following **Usage** section.
 user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 ```
 
+Alternatively, you can build this in docker by cloning the repository (as above) and running
+```
+user@host:~/DIR$ docker built -t sniffer <location_of_repo>
+```
+
+Then you can run the container with
+```
+user@host:~/DIR$ docker run -it --rm sniffer <args>
+```
+
+See usage section below for <args>.
+
+
 ## Usage
 ```
 packet_sniffer.py [-h] [-i INTERFACE] [-d]
