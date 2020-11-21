@@ -16,11 +16,20 @@ run by any Python 3.x interpreter.
 
 ## Installation
 
+### GNU / Linux
+
 Simply clone this repository with `git clone` and execute the `packet_sniffer.py` file 
 as described in the following **Usage** section.
 ```
 user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 ```
+
+### Other Systems
+
+This project is dependent on PF_PACKET, a stateful packet filter not typically
+found on Windows or OS X. For demonstration purposes, look to the
+`containerized` branch, which includes a Dockerfile that will allow you
+try out this project. See the readme of that branch for more details.
 
 ## Usage
 ```
