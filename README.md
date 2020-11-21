@@ -22,15 +22,19 @@ as described in the following **Usage** section.
 user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 ```
 
-Alternatively, this project can be build in docker by cloning the repository (as above) and running:
+## Docker
+
+Alternatively, this project can be build in Docker by cloning the repository (as above) and running:
 ```
 user@host:~/DIR$ docker built -t sniffer <location_of_repo>
 ```
 
 Then the container can be run container with:
 ```
-user@host:~/DIR$ docker run -it --rm sniffer <args>
+user@host:~/DIR$ docker run -it --rm --net=host sniffer <args>
 ```
+
+``--net=host`` is important if you want to capture from your host machine's interface, and not traffic from inside the container. Of course you can capture from other conatiners too with ``--net=container:<container_name``.
 
 ## Usage
 ```
