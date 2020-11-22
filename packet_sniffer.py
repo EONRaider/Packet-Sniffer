@@ -35,13 +35,13 @@ class PacketSniffer(object):
             if self.interface is not None:
                 sock.bind((self.interface, 0))
             for self.packet_num in count(1):
-                self.raw_packet = sock.recvfrom(2048)[0]
+                self.raw_packet = sock.recv(2048)
                 start: int = 0
-                for next_protocol in self.protocol_queue:
-                    protocol_class = getattr(protocols, next_protocol)
+                for proto in self.protocol_queue:
+                    protocol_class = getattr(protocols, proto)
                     end: int = start + protocol_class.header_len
                     protocol = protocol_class(self.raw_packet[start:end])
-                    setattr(self, next_protocol.lower(), protocol)
+                    setattr(self, proto.lower(), protocol)
                     if protocol.encapsulated_proto is None:
                         break
                     self.protocol_queue.append(protocol.encapsulated_proto)
