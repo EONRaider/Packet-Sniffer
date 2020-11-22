@@ -44,26 +44,26 @@ optional arguments:
 - Execute the following command with administrative privileges to
   initiate the capture of packets on all available interfaces:
 
-  `user@host:~$ sudo python3 packet_sniffer.py`
+```user@host:~$ sudo python3 packet_sniffer.py```
 
 - Sample output captured during execution:
 
-  ```sh
-  [>] Packet #476 at 17:45:13:
-      [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
-      [+] IPv4 ..........192.168.1.65 -> 140.82.113.3    | PROTO: TCP TTL: 64
-      [+] TCP ..................40820 -> 443             | Flags: 0x010 > ACK
-  [>] Packet #477 at 17:45:14:
-      [+] MAC ......dc:d9:ae:71:c8:b9 -> ae:45:39:30:8f:5a
-      [+] IPv4 ..........140.82.113.3 -> 192.168.1.65    | PROTO: TCP TTL: 49
-      [+] TCP ....................443 -> 40820           | Flags: 0x010 > ACK
-  [>] Packet #478 at 17:45:18:
-      [+] MAC ......dc:d9:ae:71:c8:b9 -> ae:45:39:30:8f:5a
-      [+] ARP Who has  192.168.1.65 ? -> Tell 192.168.1.254
-  [>] Packet #479 at 17:45:18:
-      [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
-      [+] ARP ...........192.168.1.65 -> Is at ae:45:39:30:8f:5a
-  ```
+```sh
+[>] Packet #476 at 17:45:13:
+    [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
+    [+] IPv4 ..........192.168.1.65 -> 140.82.113.3    | PROTO: TCP TTL: 64
+    [+] TCP ..................40820 -> 443             | Flags: 0x010 > ACK
+[>] Packet #477 at 17:45:14:
+    [+] MAC ......dc:d9:ae:71:c8:b9 -> ae:45:39:30:8f:5a
+    [+] IPv4 ..........140.82.113.3 -> 192.168.1.65    | PROTO: TCP TTL: 49
+    [+] TCP ....................443 -> 40820           | Flags: 0x010 > ACK
+[>] Packet #478 at 17:45:18:
+    [+] MAC ......dc:d9:ae:71:c8:b9 -> ae:45:39:30:8f:5a
+    [+] ARP Who has  192.168.1.65 ? -> Tell 192.168.1.254
+[>] Packet #479 at 17:45:18:
+    [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
+    [+] ARP ...........192.168.1.65 -> Is at ae:45:39:30:8f:5a
+```
 
 ## Legal Disclaimer
 
