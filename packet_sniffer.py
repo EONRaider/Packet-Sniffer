@@ -126,12 +126,12 @@ class SniffToScreen(OutputMethod):
             print("{0}{1}".format(i, data))
 
 
-def sniff(args):
+def sniff(interface: str, displaydata: bool):
     """Control the flow of execution of the Packet Sniffer tool."""
 
-    packet_sniffer = PacketSniffer(args.interface)
+    packet_sniffer = PacketSniffer(interface)
     to_screen = SniffToScreen(subject=packet_sniffer,
-                              display_data=args.displaydata)
+                              displaydata=displaydata)
     try:
         print('\n[>>>] Sniffer initialized. Waiting for incoming packets. '
               'Press Ctrl-C to abort...\n')
@@ -150,4 +150,5 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--displaydata', action='store_true',
                         help='Output packet data during capture.')
     cli_args = parser.parse_args()
-    sniff(cli_args)
+    sniff(interface=cli_args.interface,
+          displaydata=cli_args.displaydata)
