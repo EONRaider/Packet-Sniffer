@@ -64,10 +64,10 @@ class OutputMethod(abc.ABC):
 
 
 class SniffToScreen(OutputMethod):
-    def __init__(self, subject, *, display_data: bool):
+    def __init__(self, subject, *, displaydata: bool):
         super().__init__(subject)
         self.p = None
-        self.display_data = display_data
+        self.display_data = displaydata
 
     def update(self, packet):
         self.p = packet
@@ -76,54 +76,61 @@ class SniffToScreen(OutputMethod):
         self._display_packet_contents()
 
     def _display_output_header(self):
-        local_time = time.strftime("%H:%M:%S", time.localtime())
-        print("[>] Packet #{0} at {1}:".format(self.p.packet_num, local_time))
+        local_time = time.strftime('%H:%M:%S', time.localtime())
+        print('[>] Packet #{0} at {1}:'.format(self.p.packet_num, local_time))
 
     def _display_packet_info(self):
         for proto in self.p.protocol_queue:
             getattr(self, '_display_{}_data'.format(proto.lower()))()
 
     def _display_ethernet_data(self):
-        print("{0}[+] MAC {1:.>23} -> {2}".format(i, self.p.ethernet.source,
+        print('{0}[+] MAC {1:.>23} -> {2}'.format(i, self.p.ethernet.source,
                                                   self.p.ethernet.dest))
 
     def _display_ipv4_data(self):
-        print("{0}[+] IPv4 {1:.>22} -> {2: <15} | PROTO: {3} TTL: {4}"
-              .format(i, self.p.ipv4.source, self.p.ipv4.dest,
-                      self.p.ipv4.encapsulated_proto, self.p.ipv4.ttl))
+        print('{0}[+] IPv4 {1:.>22} -> {2: <15} | '
+              'PROTO: {3} TTL: {4}'.format(i, self.p.ipv4.source,
+                                           self.p.ipv4.dest,
+                                           self.p.ipv4.encapsulated_proto,
+                                           self.p.ipv4.ttl))
 
     def _display_ipv6_data(self):
-        print("{0}[+] IPv6 {1:.>22} -> {2: <15}".format(i, self.p.ipv6.source,
+        print('{0}[+] IPv6 {1:.>22} -> {2: <15}'.format(i, self.p.ipv6.source,
                                                         self.p.ipv6.dest))
 
     def _display_arp_data(self):
         if self.p.arp.oper == 1:  # ARP Request
-            print("{0}[+] ARP Who has {1: >13} ? -> Tell {2}"
-                  .format(i, self.p.arp.target_proto, self.p.arp.source_proto))
+            print('{0}[+] ARP Who has {1: >13} ? '
+                  '-> Tell {2}'.format(i, self.p.arp.target_proto,
+                                       self.p.arp.source_proto))
         if self.p.arp.oper == 2:  # ARP Reply
-            print("{0}[+] ARP {1:.>23} -> Is at {2}"
-                  .format(i, self.p.arp.source_proto, self.p.arp.source_hdwr))
+            print('{0}[+] ARP {1:.>23} -> '
+                  'Is at {2}'.format(i, self.p.arp.source_proto,
+                                     self.p.arp.source_hdwr))
 
     def _display_tcp_data(self):
-        print("{0}[+] TCP {1:.>23} -> {2: <15} | Flags: {3} > {4}"
-              .format(i, self.p.tcp.sport, self.p.tcp.dport,
-                      self.p.tcp.flag_hex, self.p.tcp.flag_txt))
+        print('{0}[+] TCP {1:.>23} -> {2: <15} | '
+              'Flags: {3} > {4}'.format(i, self.p.tcp.sport,
+                                        self.p.tcp.dport,
+                                        self.p.tcp.flag_hex,
+                                        self.p.tcp.flag_txt))
 
     def _display_udp_data(self):
-        print("{0}[+] UDP {1:.>23} -> {2}".format(i, self.p.udp.sport,
+        print('{0}[+] UDP {1:.>23} -> {2}'.format(i, self.p.udp.sport,
                                                   self.p.udp.dport))
 
     def _display_icmp_data(self):
-        print("{0}[+] ICMP {1:.>22} -> {2: <15} | Type: {3}"
-              .format(i, self.p.ipv4.source, self.p.ipv4.dest,
-                      self.p.icmp.type_txt))
+        print('{0}[+] ICMP {1:.>22} -> {2: <15} | '
+              'Type: {3}'.format(i, self.p.ipv4.source,
+                                 self.p.ipv4.dest,
+                                 self.p.icmp.type_txt))
 
     def _display_packet_contents(self):
         if self.display_data is True:
-            print("{0}[+] DATA:".format(i))
+            print('{0}[+] DATA:'.format(i))
             data = self.p.data.decode(errors='ignore').\
                 replace('\n', '\n{0}'.format(i*2))
-            print("{0}{1}".format(i, data))
+            print('{0}{1}'.format(i, data))
 
 
 def sniff(interface: str, displaydata: bool):
