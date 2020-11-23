@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/EONRaider/Packet-Sniffer?style=for-the-badge)](https://github.com/EONRaider/Packet-Sniffer/blob/master/LICENSE)
 
 [![Reddit](https://img.shields.io/reddit/user-karma/combined/eonraider?style=flat-square&logo=reddit)](https://www.reddit.com/user/eonraider)
-[![Keybase](https://img.shields.io/badge/keybase-eonraider-blue?style=flat-square&logo=keybase)](https://keybase.io/eonraider)
+[![GitHub](https://img.shields.io/github/followers/eonraider?label=GitHub&logo=github&style=flat-square)](https://github.com/EONRaider)
 [![Twitter](https://img.shields.io/twitter/follow/eon_raider?style=flat-square&logo=twitter)](https://twitter.com/intent/follow?screen_name=eon_raider)
 
 A simple pure-Python network packet sniffer. Packets are disassembled
@@ -53,31 +53,33 @@ optional arguments:
 - Execute the following command with administrative privileges to
   initiate the capture of packets on all available interfaces:
 
-  `user@host:~$ sudo python3 packet_sniffer.py`
+```user@host:~$ sudo python3 packet_sniffer.py```
 
 - Sample output captured during execution:
-  ```
-  [>] Packet #476 at 17:45:13:
-      [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
-      [+] IPv4 ..........192.168.1.65 -> 140.82.113.3    | PROTO: TCP TTL: 64
-      [+] TCP ..................40820 -> 443             | Flags: 0x010 > ACK
-  [>] Packet #477 at 17:45:14:
-      [+] MAC ......dc:d9:ae:71:c8:b9 -> ae:45:39:30:8f:5a
-      [+] IPv4 ..........140.82.113.3 -> 192.168.1.65    | PROTO: TCP TTL: 49
-      [+] TCP ....................443 -> 40820           | Flags: 0x010 > ACK
-  [>] Packet #478 at 17:45:18:
-      [+] MAC ......dc:d9:ae:71:c8:b9 -> ae:45:39:30:8f:5a
-      [+] ARP Who has  192.168.1.65 ? -> Tell 192.168.1.254
-  [>] Packet #479 at 17:45:18:
-      [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
-      [+] ARP ...........192.168.1.65 -> Is at ae:45:39:30:8f:5a
-  ```
+
+```sh
+[>] Packet #476 at 17:45:13:
+    [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
+    [+] IPv4 ..........192.168.1.65 -> 140.82.113.3    | PROTO: TCP TTL: 64
+    [+] TCP ..................40820 -> 443             | Flags: 0x010 > ACK
+[>] Packet #477 at 17:45:14:
+    [+] MAC ......dc:d9:ae:71:c8:b9 -> ae:45:39:30:8f:5a
+    [+] IPv4 ..........140.82.113.3 -> 192.168.1.65    | PROTO: TCP TTL: 49
+    [+] TCP ....................443 -> 40820           | Flags: 0x010 > ACK
+[>] Packet #478 at 17:45:18:
+    [+] MAC ......dc:d9:ae:71:c8:b9 -> ae:45:39:30:8f:5a
+    [+] ARP Who has  192.168.1.65 ? -> Tell 192.168.1.254
+[>] Packet #479 at 17:45:18:
+    [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
+    [+] ARP ...........192.168.1.65 -> Is at ae:45:39:30:8f:5a
+```
 
 ## Legal Disclaimer
 
-The use of code contained in this repository, either in part or in its
-totality, for engaging targets without prior mutual consent is illegal.
-**It is the end-user's responsibility to obey all applicable local, state and federal laws.**
+The use of code contained in this repository, either in part or in its totality,
+for engaging targets without prior mutual consent is illegal. **It is
+the end-user's responsibility to obey all applicable local, state
+and federal laws.**
 
 Developers assume **no liability** and are not
 responsible for misuses or damages caused by any code contained
