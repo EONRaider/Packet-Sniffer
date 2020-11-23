@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/EONRaider/Packet-Sniffer?style=for-the-badge)](https://github.com/EONRaider/Packet-Sniffer/blob/master/LICENSE)
 
 [![Reddit](https://img.shields.io/reddit/user-karma/combined/eonraider?style=flat-square&logo=reddit)](https://www.reddit.com/user/eonraider)
-[![Keybase](https://img.shields.io/badge/keybase-eonraider-blue?style=flat-square&logo=keybase)](https://keybase.io/eonraider)
+[![GitHub](https://img.shields.io/github/followers/eonraider?label=GitHub&logo=github&style=flat-square)](https://github.com/EONRaider)
 [![Twitter](https://img.shields.io/twitter/follow/eon_raider?style=flat-square&logo=twitter)](https://twitter.com/intent/follow?screen_name=eon_raider)
 
 A simple pure-Python network packet sniffer. Packets are disassembled
@@ -19,8 +19,8 @@ run by any Python 3.x interpreter.
 
 ### GNU / Linux
 
-Simply clone this repository with `git clone` and execute the
-`packet_sniffer.py` file as described in the <a href="#usage">Usage</a> section.
+Simply clone this repository with `git clone` and execute the `packet_sniffer.py`
+file as described in the following <a href="#usage">Usage</a> section.
 
 ```
 user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
@@ -75,25 +75,26 @@ optional arguments:
 - Execute the following command with administrative privileges to
   initiate the capture of packets on all available interfaces:
 
-  `user@host:~$ sudo python3 packet_sniffer.py`
+```user@host:~$ sudo python3 packet_sniffer.py```
 
 - Sample output captured during execution:
-  ```
-  [>] Packet #476 at 17:45:13:
+
+```sh
+[>] Packet #476 at 17:45:13:
     [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
     [+] IPv4 ..........192.168.1.65 -> 140.82.113.3    | PROTO: TCP TTL: 64
     [+] TCP ..................40820 -> 443             | Flags: 0x010 > ACK
-  [>] Packet #477 at 17:45:14:
+[>] Packet #477 at 17:45:14:
     [+] MAC ......dc:d9:ae:71:c8:b9 -> ae:45:39:30:8f:5a
     [+] IPv4 ..........140.82.113.3 -> 192.168.1.65    | PROTO: TCP TTL: 49
     [+] TCP ....................443 -> 40820           | Flags: 0x010 > ACK
-  [>] Packet #478 at 17:45:18:
+[>] Packet #478 at 17:45:18:
     [+] MAC ......dc:d9:ae:71:c8:b9 -> ae:45:39:30:8f:5a
     [+] ARP Who has  192.168.1.65 ? -> Tell 192.168.1.254
-  [>] Packet #479 at 17:45:18:
+[>] Packet #479 at 17:45:18:
     [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
     [+] ARP ...........192.168.1.65 -> Is at ae:45:39:30:8f:5a
-  ```
+```
 
 ## Legal Disclaimer
 
@@ -110,6 +111,7 @@ the security, privacy, confidentiality, integrity and/or availability of
 systems and their associated resources by leveraging the exploitation of known
 or unknown vulnerabilities present in said systems, including, but not limited
 to, the implementation of security controls, human- or electronically-enabled.
+
 The use of this code is **only** endorsed by the developers in those
 circumstances directly related to **educational environments** or
 **authorized penetration testing engagements** whose declared purpose is that
