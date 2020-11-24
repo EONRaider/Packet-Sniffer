@@ -20,7 +20,7 @@ run by any Python 3.x interpreter.
 ### GNU / Linux
 
 Simply clone this repository with `git clone` and execute the `packet_sniffer.py`
-file as described in the following <a href="#usage">Usage</a> section.
+file as described in the following [Usage](#usage) section.
 
 ```sh
 user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
@@ -53,12 +53,12 @@ docker run --network host sniff python packet_sniffer.py --help
 ```
 
 Usage of `--network host` is not supported on OS X or Windows
-so this container won't be fully functional - but you will see packets 
+so this container won't be fully functional - but you will see packets
 traveling within the docker subnet.
 
 ## Usage
 
-```
+```sh
 packet_sniffer.py [-h] [-i INTERFACE] [-d]
 
 A pure-Python network packet sniffer.
@@ -82,7 +82,7 @@ user@host:~$ sudo python3 packet_sniffer.py
 
 - Sample output captured during execution:
 
-```
+```sh
 [>] Packet #476 at 17:45:13:
     [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
     [+] IPv4 ..........192.168.1.65 -> 140.82.113.3    | PROTO: TCP TTL: 64
