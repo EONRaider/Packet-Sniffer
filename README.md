@@ -10,7 +10,7 @@
 
 A simple pure-Python network packet sniffer. Packets are disassembled
 as they arrive at a given network interface controller and their information
-is displayed on screen.
+is displayed on the screen.
 
 This application maintains no dependencies on third-party modules and can be
 run by any Python 3.x interpreter.
@@ -28,10 +28,10 @@ user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 
 ### Other Systems
 
-This project is dependent on `PF_PACKET`, a stateful packet filter not
-found on Windows or macOS X. For demonstration purposes you can try out this
+This project is dependent on `PF_PACKET` - a stateful packet filter not
+found on Windows or macOS X. For demonstration purposes, you can try out this
 package in a Docker container. Although it will not have full access to
-localhost on your machine, you can still sniff on the Docker subnet, and at
+localhost on your machine, you can still sniff on the Docker subnet and at
 least get the module running.
 
 Use this command to build and run from the project directory:
@@ -43,7 +43,7 @@ docker build -t sniff . && docker run --network host sniff
 Note that the entry command is simply `python packet_sniffer.py`, so feel
 free to use the full functionality of the module by overriding the default
 command. Remember that we tagged the container with the name "sniff"
-before, so we can pass command line arguments to the sniffer in the
+before, so we can pass command-line arguments to the sniffer in the
 following manner:
 
 ```sh
@@ -103,17 +103,17 @@ user@host:~$ sudo python3 packet_sniffer.py
 
 The use of code contained in this repository, either in part or in its totality,
 for engaging targets without prior mutual consent is illegal. **It is
-the end-user's responsibility to obey all applicable local, state
+the end user's responsibility to obey all applicable local, state,
 and federal laws.**
 
 Developers assume **no liability** and are not
 responsible for misuses or damages caused by any code contained
 in this repository in any event that, accidentally or otherwise, it comes to
 be utilized by a threat agent or unauthorized entity as a means to compromise
-the security, privacy, confidentiality, integrity and/or availability of
+the security, privacy, confidentiality, integrity, and|or availability of
 systems and their associated resources by leveraging the exploitation of known
 or unknown vulnerabilities present in said systems, including, but not limited
-to, the implementation of security controls, human- or electronically-enabled.
+to the implementation of security controls, human- or electronically-enabled.
 
 The use of this code is **only** endorsed by the developers in those
 circumstances directly related to **educational environments** or
