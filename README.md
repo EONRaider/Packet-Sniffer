@@ -22,40 +22,41 @@ run by any Python 3.x interpreter.
 Simply clone this repository with `git clone` and execute the `packet_sniffer.py`
 file as described in the following <a href="#usage">Usage</a> section.
 
-```
+```sh
 user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 ```
 
 ### Other Systems
 
 This project is dependent on `PF_PACKET`, a stateful packet filter not
-found on Windows or OS X. For demonstration purposes, you can try out this
+found on Windows or macOS X. For demonstration purposes you can try out this
 package in a Docker container. Although it will not have full access to
 localhost on your machine, you can still sniff on the Docker subnet, and at
 least get the module running.
 
 Use this command to build and run from the project directory:
 
-```
+```sh
 docker build -t sniff . && docker run --network host sniff
 ```
 
 Note that the entry command is simply `python packet_sniffer.py`, so feel
 free to use the full functionality of the module by overriding the default
-command. Remember, we tagged the container with the name "sniff" before, so
-we can pass command line args to the sniffer like so:
+command. Remember that we tagged the container with the name "sniff"
+before, so we can pass command line arguments to the sniffer in the
+following manner:
 
-```
+```sh
 docker run --network host sniff [your command goes here]
 echo "Now let's print help"
 docker run --network host sniff python packet_sniffer.py --help
 ```
 
-Usage of `--network host` is not supported on OS X or Windows,
-so this container won't be fully functional, but you will see packets traveling
-within the docker subnet.
+Usage of `--network host` is not supported on OS X or Windows
+so this container won't be fully functional - but you will see packets 
+traveling within the docker subnet.
 
-<h2 id="usage">Usage</h2>
+## Usage
 
 ```
 packet_sniffer.py [-h] [-i INTERFACE] [-d]
@@ -75,11 +76,13 @@ optional arguments:
 - Execute the following command with administrative privileges to
   initiate the capture of packets on all available interfaces:
 
-```user@host:~$ sudo python3 packet_sniffer.py```
+```sh
+user@host:~$ sudo python3 packet_sniffer.py
+```
 
 - Sample output captured during execution:
 
-```sh
+```
 [>] Packet #476 at 17:45:13:
     [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
     [+] IPv4 ..........192.168.1.65 -> 140.82.113.3    | PROTO: TCP TTL: 64
