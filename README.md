@@ -17,16 +17,47 @@ run by any Python 3.x interpreter.
 
 ## Installation
 
-Simply clone this repository with `git clone` and execute the `packet_sniffer.py` file
-as described in the following **Usage** section.
+### GNU / Linux
 
-```sh
+Simply clone this repository with `git clone` and execute the `packet_sniffer.py`
+file as described in the following <a href="#usage">Usage</a> section.
+
+```
 user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 ```
 
-## Usage
+### Other Systems
 
-```sh
+This project is dependent on `PF_PACKET`, a stateful packet filter not
+found on Windows or OS X. For demonstration purposes, you can try out this
+package in a Docker container. Although it will not have full access to
+localhost on your machine, you can still sniff on the Docker subnet, and at
+least get the module running.
+
+Use this command to build and run from the project directory:
+
+```
+docker build -t sniff . && docker run --network host sniff
+```
+
+Note that the entry command is simply `python packet_sniffer.py`, so feel
+free to use the full functionality of the module by overriding the default
+command. Remember, we tagged the container with the name "sniff" before, so
+we can pass command line args to the sniffer like so:
+
+```
+docker run --network host sniff [your command goes here]
+echo "Now let's print help"
+docker run --network host sniff python packet_sniffer.py --help
+```
+
+Usage of `--network host` is not supported on OS X or Windows,
+so this container won't be fully functional, but you will see packets traveling
+within the docker subnet.
+
+<h2 id="usage">Usage</h2>
+
+```
 packet_sniffer.py [-h] [-i INTERFACE] [-d]
 
 A pure-Python network packet sniffer.
@@ -75,14 +106,15 @@ and federal laws.**
 Developers assume **no liability** and are not
 responsible for misuses or damages caused by any code contained
 in this repository in any event that, accidentally or otherwise, it comes to
-be utilized by a threat agent or unauthorized entity as a means to compromise the security, privacy,
-confidentiality, integrity and/or availability of systems and their associated
-resources by leveraging the exploitation of known or unknown vulnerabilities present
-in said systems, including, but not limited to, the implementation of security controls,
-human- or electronically-enabled.
+be utilized by a threat agent or unauthorized entity as a means to compromise
+the security, privacy, confidentiality, integrity and/or availability of
+systems and their associated resources by leveraging the exploitation of known
+or unknown vulnerabilities present in said systems, including, but not limited
+to, the implementation of security controls, human- or electronically-enabled.
 
-The use of this code is **only** endorsed by the developers in those circumstances
-directly related to **educational environments** or **authorized penetration testing
-engagements** whose declared purpose is that of finding and mitigating vulnerabilities
-in systems, limiting their exposure to compromises and exploits employed by malicious
-agents as defined in their respective threat models.
+The use of this code is **only** endorsed by the developers in those
+circumstances directly related to **educational environments** or
+**authorized penetration testing engagements** whose declared purpose is that
+of finding and mitigating vulnerabilities in systems, limiting their exposure
+to compromises and exploits employed by malicious agents as defined in their
+respective threat models.
