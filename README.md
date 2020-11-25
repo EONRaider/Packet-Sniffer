@@ -58,7 +58,7 @@ traveling within the docker subnet.
 
 ## Usage
 
-```sh
+```
 packet_sniffer.py [-h] [-i INTERFACE] [-d]
 
 A pure-Python network packet sniffer.
@@ -82,7 +82,7 @@ user@host:~$ sudo python3 packet_sniffer.py
 
 - Sample output captured during execution:
 
-```sh
+```
 [>] Packet #476 at 17:45:13:
     [+] MAC ......ae:45:39:30:8f:5a -> dc:d9:ae:71:c8:b9
     [+] IPv4 ..........192.168.1.65 -> 140.82.113.3    | PROTO: TCP TTL: 64
