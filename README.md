@@ -1,7 +1,8 @@
 # Python 3 Network Packet Sniffer
 
-[![Python Version](https://img.shields.io/badge/python-3.x-blue?style=for-the-badge&logo=python)](https://github.com/EONRaider/Packet-Sniffer/)
-[![Open Source? Yes!](https://img.shields.io/badge/Open%20Source%3F-Yes!-green?style=for-the-badge&logo=appveyor)](https://github.com/EONRaider/Packet-Sniffer/)
+![Python Version](https://img.shields.io/badge/python-3.x-blue?style=for-the-badge&logo=python)
+![OS](https://img.shields.io/badge/OS-GNU%2FLinux-red?style=for-the-badge&logo=linux)
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/eonraider/arp-spoofer?style=for-the-badge)
 [![License](https://img.shields.io/github/license/EONRaider/Packet-Sniffer?style=for-the-badge)](https://github.com/EONRaider/Packet-Sniffer/blob/master/LICENSE)
 
 [![Reddit](https://img.shields.io/reddit/user-karma/combined/eonraider?style=flat-square&logo=reddit)](https://www.reddit.com/user/eonraider)
@@ -73,12 +74,18 @@ optional arguments:
 
 ## Running the Application
 
-- Execute the following command with administrative privileges to
-  initiate the capture of packets on all available interfaces:
-
-```sh
-user@host:~$ sudo python3 packet_sniffer.py
-```
+<table>
+<tbody>
+  <tr>
+    <td>Objective</td>
+    <td>Initiate the capture of packets on all available interfaces</td>
+  </tr>
+  <tr>
+    <td>Execution</td>
+    <td><b>sudo python3 packet_sniffer.py</b></td>
+  </tr>
+</tbody>
+</table>
 
 - Sample output captured during execution:
 
