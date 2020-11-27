@@ -2,9 +2,8 @@
 
 ![Python Version](https://img.shields.io/badge/python-3.x-blue?style=for-the-badge&logo=python)
 ![OS](https://img.shields.io/badge/OS-GNU%2FLinux-red?style=for-the-badge&logo=linux)
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/eonraider/arp-spoofer?style=for-the-badge)
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/eonraider/packet-sniffer?style=for-the-badge)](https://www.codefactor.io/repository/github/eonraider/packet-sniffer)
 [![License](https://img.shields.io/github/license/EONRaider/Packet-Sniffer?style=for-the-badge)](https://github.com/EONRaider/Packet-Sniffer/blob/master/LICENSE)
-
 [![Reddit](https://img.shields.io/reddit/user-karma/combined/eonraider?style=flat-square&logo=reddit)](https://www.reddit.com/user/eonraider)
 [![GitHub](https://img.shields.io/github/followers/eonraider?label=GitHub&logo=github&style=flat-square)](https://github.com/EONRaider)
 [![Twitter](https://img.shields.io/twitter/follow/eon_raider?style=flat-square&logo=twitter)](https://twitter.com/intent/follow?screen_name=eon_raider)
@@ -23,7 +22,7 @@ run by any Python 3.x interpreter.
 Simply clone this repository with `git clone` and execute the `packet_sniffer.py`
 file as described in the following [Usage](#usage) section.
 
-```sh
+```
 user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 ```
 
@@ -37,7 +36,7 @@ least get the module running.
 
 Use this command to build and run from the project directory:
 
-```sh
+```
 docker build -t sniff . && docker run --network host sniff
 ```
 
@@ -47,7 +46,7 @@ command. Remember that we tagged the container with the name "sniff"
 before, so we can pass command-line arguments to the sniffer in the
 following manner:
 
-```sh
+```
 docker run --network host sniff [your command goes here]
 echo "Now let's print help"
 docker run --network host sniff python packet_sniffer.py --help
