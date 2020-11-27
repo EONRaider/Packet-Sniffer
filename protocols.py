@@ -4,7 +4,8 @@
 __author__ = 'EONRaider @ keybase.io/eonraider'
 
 
-from ctypes import *
+from ctypes import BigEndianStructure, create_string_buffer, c_ubyte, c_uint8, \
+    c_uint16, c_uint32, sizeof
 from socket import inet_ntop, AF_INET, AF_INET6
 
 
