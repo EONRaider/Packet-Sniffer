@@ -49,7 +49,7 @@ class Ethernet(Protocol):      # IEEE 802.3 standard
     header_len = 14
     ethertypes = {'0x0806': 'ARP', '0x0800': 'IPv4', '0x86dd': 'IPv6'}
 
-    def __init__(self, packet: bytes = None):
+    def __init__(self, packet: bytes):
         super().__init__(packet)
         self.dest = self.addr_array_to_hdwr(self.dst)
         self.source = self.addr_array_to_hdwr(self.src)
@@ -76,7 +76,7 @@ class IPv4(Protocol):              # IETF RFC 791
     header_len = 20
     proto_numbers = {1: 'ICMP', 6: 'TCP', 17: 'UDP'}
 
-    def __init__(self, packet: bytes = None):
+    def __init__(self, packet: bytes):
         super().__init__(packet)
         self.source = inet_ntop(AF_INET, self.src)
         self.dest = inet_ntop(AF_INET, self.dst)
@@ -97,7 +97,7 @@ class IPv6(Protocol):               # IETF RFC 2460 / 8200
     ]
     header_len = 40
 
-    def __init__(self, packet: bytes = None):
+    def __init__(self, packet: bytes):
         super().__init__(packet)
         self.source = inet_ntop(AF_INET6, self.src)
         self.dest = inet_ntop(AF_INET6, self.dst)
@@ -117,7 +117,7 @@ class ARP(Protocol):           # IETF RFC 826
     ]
     header_len = 28
 
-    def __init__(self, packet: bytes = None):
+    def __init__(self, packet: bytes):
         super().__init__(packet)
         self.protocol = self.hex_format(self.ptype, 6)
         self.source_hdwr = self.addr_array_to_hdwr(self.sha)
@@ -141,7 +141,7 @@ class TCP(Protocol):                # IETF RFC 675
     ]
     header_len = 32
 
-    def __init__(self, packet: bytes = None):
+    def __init__(self, packet: bytes):
         super().__init__(packet)
         self.flag_hex = self.hex_format(self.flags, 5)
         self.flag_txt = self.translate_flags()
@@ -162,7 +162,7 @@ class UDP(Protocol):          # IETF RFC 768
     ]
     header_len = 8
 
-    def __init__(self, packet: bytes = None):
+    def __init__(self, packet: bytes):
         super().__init__(packet)
 
 
@@ -176,7 +176,7 @@ class ICMP(Protocol):           # IETF RFC 792
     header_len = 8
     icmp_types = {0: 'REPLY', 8: 'REQUEST'}
 
-    def __init__(self, packet: bytes = None):
+    def __init__(self, packet: bytes):
         super().__init__(packet)
         # Limit implementation to ICMP ECHO
         self.type_txt = self.icmp_types.get(self.type, 'OTHER')
