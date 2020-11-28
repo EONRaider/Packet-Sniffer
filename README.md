@@ -84,10 +84,14 @@ optional arguments:
     <td>Execution</td>
     <td><b>sudo python3 packet_sniffer.py</b></td>
   </tr>
+  <tr>
+    <td>Outcome</td>
+    <td>Refer to sample output below</td>
+  </tr>
 </tbody>
 </table>
 
-- Sample output captured during execution:
+- Sample output:
 
 ```
 [>] Packet #476 at 17:45:13:
