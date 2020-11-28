@@ -23,7 +23,7 @@ class Protocol(BigEndianStructure):
         return create_string_buffer(sizeof(self))[:]
 
     @staticmethod
-    def addr_array_to_hdwr(addr):
+    def addr_array_to_hdwr(addr: str) -> str:
         """
         Converts a c_ubyte array of 6 bytes to IEEE 802 MAC address.
         Ex: From b'\xceP\x9a\xcc\x8c\x9d' to 'ce:50:9a:cc:8c:9d'
@@ -31,13 +31,13 @@ class Protocol(BigEndianStructure):
         return ':'.join('{:02x}'.format(octet) for octet in bytes(addr))
 
     @staticmethod
-    def hex_format(hex_value, str_len: int):
+    def hex_format(value: int, str_len: int) -> str:
         """
         Fills a hex value with zeroes to the left for compliance with
         the presentation of codes used in Internet protocols.
         Ex: From '0x800' to '0x0800'
         """
-        return format(hex_value, '#0{}x'.format(str_len))
+        return format(value, '#0{}x'.format(str_len))
 
 
 class Ethernet(Protocol):      # IEEE 802.3 standard
