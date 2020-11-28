@@ -67,8 +67,8 @@ A pure-Python network packet sniffer.
 optional arguments:
   -h, --help            show this help message and exit
   -i INTERFACE, --interface INTERFACE
-                        Interface from which packets will be captured (set to None to
-                        capture from all available interfaces by default).
+                        Interface from which packets will be captured (captures
+                        from all available interfaces by default).
   -d, --displaydata     Output packet data during capture.
 ```
 
