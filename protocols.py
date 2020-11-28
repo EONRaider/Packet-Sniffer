@@ -54,7 +54,8 @@ class Ethernet(Protocol):      # IEEE 802.3 standard
         self.dest = self.addr_array_to_hdwr(self.dst)
         self.source = self.addr_array_to_hdwr(self.src)
         self.ethertype = self.hex_format(self.eth, 6)
-        self.encapsulated_proto = self.ethertypes[self.ethertype]
+        # Limit implementation to common protocols
+        self.encapsulated_proto = self.ethertypes.get(self.ethertype, None)
 
 
 class IPv4(Protocol):              # IETF RFC 791
@@ -81,7 +82,7 @@ class IPv4(Protocol):              # IETF RFC 791
         self.source = inet_ntop(AF_INET, self.src)
         self.dest = inet_ntop(AF_INET, self.dst)
         # Limit implementation to common protocols
-        self.encapsulated_proto = self.proto_numbers.get(self.proto)
+        self.encapsulated_proto = self.proto_numbers.get(self.proto, None)
 
 
 class IPv6(Protocol):               # IETF RFC 2460 / 8200
