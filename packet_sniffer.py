@@ -102,7 +102,7 @@ class SniffToScreen(OutputMethod):
             print('{0}[+] ARP Who has {1: >13} ? '
                   '-> Tell {2}'.format(i, self.p.arp.target_proto,
                                        self.p.arp.source_proto))
-        if self.p.arp.oper == 2:  # ARP Reply
+        else:                     # ARP Reply
             print('{0}[+] ARP {1:.>23} -> '
                   'Is at {2}'.format(i, self.p.arp.source_proto,
                                      self.p.arp.source_hdwr))
@@ -151,8 +151,8 @@ if __name__ == '__main__':
                                                  'sniffer.')
     parser.add_argument('-i', '--interface', type=str, default=None,
                         help='Interface from which packets will be captured '
-                             '(set to None to capture from all available '
-                             'interfaces by default).')
+                             '(captures from all available interfaces by '
+                             'default).')
     parser.add_argument('-d', '--displaydata', action='store_true',
                         help='Output packet data during capture.')
     cli_args = parser.parse_args()
