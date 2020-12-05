@@ -2,12 +2,12 @@
 
 ![Python Version](https://img.shields.io/badge/python-3.x-blue?style=for-the-badge&logo=python)
 ![OS](https://img.shields.io/badge/OS-GNU%2FLinux-red?style=for-the-badge&logo=linux)
-[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/eonraider/packet-sniffer?style=for-the-badge)](https://www.codefactor.io/repository/github/eonraider/packet-sniffer)
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/EONRaider/Packet-Sniffer?label=CodeFactor&logo=codefactor&style=for-the-badge)](https://www.codefactor.io/repository/github/eonraider/packet-sniffer)
 [![License](https://img.shields.io/github/license/EONRaider/Packet-Sniffer?style=for-the-badge)](https://github.com/EONRaider/Packet-Sniffer/blob/master/LICENSE)
 
-[![Reddit](https://img.shields.io/reddit/user-karma/combined/eonraider?style=flat-square&logo=reddit)](https://www.reddit.com/user/eonraider)
-[![GitHub](https://img.shields.io/github/followers/eonraider?label=GitHub&logo=github&style=flat-square)](https://github.com/EONRaider)
-[![Twitter](https://img.shields.io/twitter/follow/eon_raider?style=flat-square&logo=twitter)](https://twitter.com/intent/follow?screen_name=eon_raider)
+[![Reddit](https://img.shields.io/badge/Reddit-EONRaider-FF4500?style=flat-square&logo=reddit)](https://www.reddit.com/user/eonraider)
+[![Discord](https://img.shields.io/badge/Discord-EONRaider-7289DA?style=flat-square&logo=discord)](https://discord.gg/KVjWBptv)
+[![Twitter](https://img.shields.io/badge/Twitter-eon__raider-38A1F3?style=flat-square&logo=twitter)](https://twitter.com/intent/follow?screen_name=eon_raider)
 
 A simple pure-Python network packet sniffer. Packets are disassembled
 as they arrive at a given network interface controller and their information
@@ -30,7 +30,7 @@ user@host:~/DIR$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 ### Other Systems
 
 This project is dependent on `PF_PACKET` - a stateful packet filter not
-found on Windows or macOS X. For demonstration purposes, you can try out this
+found on Windows or Mac OS X. For demonstration purposes, you can try out this
 package in a Docker container. Although it will not have full access to
 localhost on your machine, you can still sniff on the Docker subnet and at
 least get the module running.
