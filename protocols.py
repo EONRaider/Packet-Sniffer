@@ -15,7 +15,7 @@ class Protocol(BigEndianStructure):
     def __new__(cls, packet):
         return cls.from_buffer_copy(packet)
 
-    def __init__(self, packet=None):
+    def __init__(self, *args):
         super().__init__()
         self.encapsulated_proto = None
 
@@ -127,7 +127,7 @@ class ARP(Protocol):           # IETF RFC 826
         self.target_proto = inet_ntop(AF_INET, bytes(self.tpa))
 
 
-class TCP(Protocol):                # IETF RFC 675
+class TCP(Protocol):                # IETF RFC 793
     _fields_ = [
         ("sport", c_uint16),        # Source port
         ("dport", c_uint16),        # Destination port
