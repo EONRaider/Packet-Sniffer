@@ -52,7 +52,7 @@ class PacketSniffer(object):
 class OutputMethod(abc.ABC):
     """Interface for the implementation of all classes responsible for
     further processing and/or output of the information gathered by
-    the subject class."""
+    the PacketSniffer class (referenced as 'subject')."""
 
     def __init__(self, subject):
         subject.register(self)
