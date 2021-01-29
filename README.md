@@ -114,17 +114,17 @@ optional arguments:
 
 The use of code contained in this repository, either in part or in its totality,
 for engaging targets without prior mutual consent is illegal. **It is
-the end user's responsibility to obey all applicable local, state,
-and federal laws.**
+the end user's responsibility to obey all applicable local, state and
+federal laws.**
 
 Developers assume **no liability** and are not
 responsible for misuses or damages caused by any code contained
 in this repository in any event that, accidentally or otherwise, it comes to
 be utilized by a threat agent or unauthorized entity as a means to compromise
-the security, privacy, confidentiality, integrity, and|or availability of
+the security, privacy, confidentiality, integrity, and/or availability of
 systems and their associated resources by leveraging the exploitation of known
 or unknown vulnerabilities present in said systems, including, but not limited
-to the implementation of security controls, human- or electronically-enabled.
+to, the implementation of security controls, human- or electronically-enabled.
 
 The use of this code is **only** endorsed by the developers in those
 circumstances directly related to **educational environments** or
