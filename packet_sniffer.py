@@ -34,7 +34,7 @@ class PacketSniffer(object):
             if self.interface is not None:
                 sock.bind((self.interface, 0))
             for self.packet_num in count(1):
-                raw_packet = sock.recv(2048)
+                raw_packet = sock.recv(9000)
                 start: int = 0
                 for proto in self.protocol_queue:
                     proto_class = getattr(protocols, proto)
