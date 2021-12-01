@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
 # https://github.com/EONRaider/Packet-Sniffer
 
-__author__ = 'EONRaider @ keybase.io/eonraider'
+__author__ = "EONRaider @ keybase.io/eonraider"
 
 
-from ctypes import BigEndianStructure, create_string_buffer, c_ubyte, c_uint8, \
-    c_uint16, c_uint32, sizeof
+from ctypes import (
+    BigEndianStructure,
+    create_string_buffer,
+    c_ubyte,
+    c_uint8,
+    c_uint16,
+    c_uint32,
+    sizeof
+)
 from socket import inet_ntop, AF_INET, AF_INET6
 
 
@@ -26,28 +33,28 @@ class Protocol(BigEndianStructure):
     def addr_array_to_hdwr(address: str) -> str:
         """
         Converts a c_ubyte array of 6 bytes to IEEE 802 MAC address.
-        Ex: From b'\xceP\x9a\xcc\x8c\x9d' to 'ce:50:9a:cc:8c:9d'
+        Ex: From b"\xceP\x9a\xcc\x8c\x9d" to "ce:50:9a:cc:8c:9d"
         """
-        return ':'.join(format(octet, '02x') for octet in bytes(address))
+        return ":".join(format(octet, "02x") for octet in bytes(address))
 
     @staticmethod
     def hex_format(value: int, str_length: int) -> str:
         """
         Fills a hex value with zeroes to the left for compliance with
         the presentation of codes used in Internet protocols.
-        Ex: From '0x800' to '0x0800'
+        Ex: From "0x800" to "0x0800"
         """
-        return format(value, '#0{}x'.format(str_length))
+        return format(value, "#0{}x".format(str_length))
 
 
 class Ethernet(Protocol):      # IEEE 802.3 standard
     _fields_ = [
-        ('dst', c_ubyte * 6),  # Destination hardware address
-        ('src', c_ubyte * 6),  # Source hardware address
-        ('eth', c_uint16)      # Ethertype
+        ("dst", c_ubyte * 6),  # Destination hardware address
+        ("src", c_ubyte * 6),  # Source hardware address
+        ("eth", c_uint16)      # Ethertype
     ]
     header_len = 14
-    ethertypes = {'0x0806': 'ARP', '0x0800': 'IPv4', '0x86dd': 'IPv6'}
+    ethertypes = {"0x0806": "ARP", "0x0800": "IPv4", "0x86dd": "IPv6"}
 
     def __init__(self, packet: bytes):
         super().__init__(packet)
@@ -75,7 +82,7 @@ class IPv4(Protocol):              # IETF RFC 791
         ("dst", c_ubyte * 4)       # Destination address
     ]
     header_len = 20
-    proto_numbers = {1: 'ICMP', 6: 'TCP', 17: 'UDP'}
+    proto_numbers = {1: "ICMP", 6: "TCP", 17: "UDP"}
 
     def __init__(self, packet: bytes):
         super().__init__(packet)
@@ -148,10 +155,10 @@ class TCP(Protocol):                # IETF RFC 793
         self.flag_txt = self.translate_flags()
 
     def translate_flags(self):
-        f_names = 'NS', 'CWR', 'ECE', 'URG', 'ACK', 'PSH', 'RST', 'SYN', 'FIN'
-        f_bits = format(self.flags, '09b')
-        return ' '.join(flag_name for flag_name, flag_bit in
-                            zip(f_names, f_bits) if flag_bit == '1')
+        f_names = "NS", "CWR", "ECE", "URG", "ACK", "PSH", "RST", "SYN", "FIN"
+        f_bits = format(self.flags, "09b")
+        return " ".join(flag_name for flag_name, flag_bit in
+                        zip(f_names, f_bits) if flag_bit == "1")
 
 
 class UDP(Protocol):          # IETF RFC 768
@@ -175,9 +182,9 @@ class ICMP(Protocol):           # IETF RFC 792
         ("rest", c_ubyte * 4)   # Rest of header (contents vary)
     ]
     header_len = 8
-    icmp_types = {0: 'REPLY', 8: 'REQUEST'}
+    icmp_types = {0: "REPLY", 8: "REQUEST"}
 
     def __init__(self, packet: bytes):
         super().__init__(packet)
         # Limit implementation to ICMP ECHO
-        self.type_txt = self.icmp_types.get(self.type, 'OTHER')
+        self.type_txt = self.icmp_types.get(self.type, "OTHER")
