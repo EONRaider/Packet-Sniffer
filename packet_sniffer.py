@@ -77,14 +77,13 @@ class PacketSniffer:
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Network packet sniffer.")
+    parser = argparse.ArgumentParser(description="Network packet sniffer")
     parser.add_argument(
         "-i", "--interface",
         type=str,
         default=None,
-        help="Interface from which packets will be captured "
-             "(captures from all available interfaces by "
-             "default)."
+        help="Interface from which packets will be captured (monitors all "
+             "available interfaces by default)."
     )
     parser.add_argument(
         "-d", "--display-data",
