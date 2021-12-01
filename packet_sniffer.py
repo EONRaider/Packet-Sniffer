@@ -13,11 +13,17 @@ from output import OutputToScreen
 
 class Decoder:
     def __init__(self, interface: str):
+        """Decodes packets incoming from a given interface.
+
+        :param interface: Interface from which packets will be captured
+            and decoded.
+        """
         self._interface = interface
         self.data = None
         self.protocol_queue = ["Ethernet"]
 
     def execute(self) -> Generator:
+        """Yields a decoded packet as an instance of Protocol."""
         with socket(PF_PACKET, SOCK_RAW, ntohs(0x0003)) as sock:
             if self._interface is not None:
                 sock.bind((self._interface, 0))
@@ -40,13 +46,22 @@ class Decoder:
 
 class PacketSniffer:
     def __init__(self, interface: str):
+        """Monitor a network interface for incoming data, decode it and
+            send to pre-defined output methods.
+
+        :param interface: Interface from which packets will be captured
+            and decoded.
+        """
         self._observers = list()
         self._decoder = Decoder(interface)
 
     def register(self, observer) -> None:
+        """Register an observer for processing/output of decoded
+        packets."""
         self._observers.append(observer)
 
     def _notify_all(self, *args, **kwargs) -> None:
+        """Send a decoded packet to all registered observers."""
         [observer.update(*args, **kwargs) for observer in self._observers]
 
     def execute(self, display_data: bool) -> None:
