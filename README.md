@@ -43,11 +43,17 @@ user@host:~/Packet-Sniffer$ python3 build.py
 
 ### III. (Optional) Development Mode
 It's also possible to run the application *without any third-party dependencies or 
-manipulation of binaries.* Simply clone this repository with `git clone` and execute the `packet_sniffer.py` file. 
+manipulation of binaries.* Simply clone this repository with `git clone` and execute 
+the `packet_sniffer.py` file by passing the required `PYTHONPATH` to `sudo`.
 ```shell
 user@host:~$ git clone https://github.com/EONRaider/Packet-Sniffer.git
-user@host:~$ sudo python3 packet_sniffer.py
+user@host:~$ cd Packet-Sniffer
+user@host:~/Packet-Sniffer$ sudo --preserve-env PYTHONPATH=$(pwd) python3 src/packet_sniffer.py
 ```
+*Why the black magic with `sudo`? The command is required due to the use of `socket.SOCK_RAW`. 
+The `--preserve-env` option is required because the `src` module is only visible from the 
+root directory of the project and, hence, `PYTHONPATH` must be manipulated accordingly. This 
+is not a result of the design of the tool itself, but of the way Python works internally.*
 
 ## Usage
 ```
