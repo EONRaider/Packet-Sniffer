@@ -5,7 +5,7 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 
 from ctypes import c_uint16
 
-from protocols import Protocol
+from src.protocols import Protocol
 
 
 class UDP(Protocol):          # IETF RFC 768

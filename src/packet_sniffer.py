@@ -7,8 +7,8 @@ import itertools
 from socket import PF_PACKET, SOCK_RAW, ntohs, socket
 from typing import Generator
 
-import protocols
-from output import OutputToScreen
+import src.protocols as protocols
+from src.output import OutputToScreen
 
 
 class Decoder:
@@ -47,7 +47,7 @@ class Decoder:
 class PacketSniffer:
     def __init__(self, interface: str):
         """Monitor a network interface for incoming data, decode it and
-            send to pre-defined output methods.
+        send to pre-defined output methods.
 
         :param interface: Interface from which packets will be captured
             and decoded.

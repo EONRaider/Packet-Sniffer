@@ -5,7 +5,7 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 
 from ctypes import c_ubyte, c_uint16
 
-from protocols import Protocol
+from src.protocols import Protocol
 
 
 class Ethernet(Protocol):      # IEEE 802.3 standard

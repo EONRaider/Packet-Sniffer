@@ -5,7 +5,7 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 
 from ctypes import c_uint16, c_uint32
 
-from protocols import Protocol
+from src.protocols import Protocol
 
 
 class TCP(Protocol):                # IETF RFC 793

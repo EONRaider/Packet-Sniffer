@@ -6,7 +6,7 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 from ctypes import c_ubyte, c_uint8, c_uint16
 from socket import inet_ntop, AF_INET
 
-from protocols import Protocol
+from src.protocols import Protocol
 
 
 class ARP(Protocol):           # IETF RFC 826

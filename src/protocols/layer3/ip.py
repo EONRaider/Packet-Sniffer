@@ -6,7 +6,7 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 from ctypes import c_ubyte, c_uint8, c_uint16, c_uint32
 from socket import inet_ntop, AF_INET, AF_INET6
 
-from protocols import Protocol
+from src.protocols import Protocol
 
 
 class IPv4(Protocol):              # IETF RFC 791
