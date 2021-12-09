@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "packet-sniffer"
-version = "1.0.0"
+version = "1.1.0"
 description = "A Network Packet Sniffing tool developed in Python 3"
 authors = ["EONRaider <livewire_voodoo@protonmail.com>"]
 
