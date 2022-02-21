@@ -36,7 +36,9 @@ class OutputToScreen(OutputMethod):
 
     def _display_output_header(self):
         local_time = time.strftime("%H:%M:%S", time.localtime())
-        print(f"[>] Packet #{self.p.packet_num} at {local_time}:")
+        interface = "all" if self.p.interface is None else self.p.interface
+        print(f"[>] Packet #{self.p.packet_num} at {local_time} from interface "
+              f"\"{interface}\":")
 
     def _display_packet_info(self):
         for proto in self.p.protocol_queue:
