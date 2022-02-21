@@ -46,41 +46,41 @@ class OutputToScreen(OutputMethod):
 
     def _display_ethernet_data(self):
         print("{0}[+] Ethernet {1:.>23} -> {2}".format(self.i,
-                                                       self.p.ethernet.source,
-                                                       self.p.ethernet.dest))
+                                                       self.p.ethernet.src,
+                                                       self.p.ethernet.dst))
 
     def _display_ipv4_data(self):
         print("{0}[+] IPv4 {1:.>27} -> {2: <15} | "
               "PROTO: {3} TTL: {4}".format(self.i,
-                                           self.p.ipv4.source,
-                                           self.p.ipv4.dest,
+                                           self.p.ipv4.src,
+                                           self.p.ipv4.dst,
                                            self.p.ipv4.encapsulated_proto,
                                            self.p.ipv4.ttl))
 
     def _display_ipv6_data(self):
         print("{0}[+] IPv6 {1:.>27} -> {2: <15}".format(self.i,
-                                                        self.p.ipv6.source,
-                                                        self.p.ipv6.dest))
+                                                        self.p.ipv6.src,
+                                                        self.p.ipv6.dst))
 
     def _display_arp_data(self):
         if self.p.arp.oper == 1:  # ARP Request
             print("{0}[+] ARP Who has {1:.>18} ? "
                   "-> Tell {2}".format(self.i,
-                                       self.p.arp.target_proto,
-                                       self.p.arp.source_proto))
+                                       self.p.arp.tpa,
+                                       self.p.arp.spa))
         else:                     # ARP Reply
             print("{0}[+] ARP {1:.>28} -> "
                   "Is at {2}".format(self.i,
-                                     self.p.arp.source_proto,
-                                     self.p.arp.source_hdwr))
+                                     self.p.arp.spa,
+                                     self.p.arp.sha))
 
     def _display_tcp_data(self):
         print("{0}[+] TCP {1:.>28} -> {2: <15} | "
               "Flags: {3} > {4}".format(self.i,
                                         self.p.tcp.sport,
                                         self.p.tcp.dport,
-                                        self.p.tcp.flag_hex,
-                                        self.p.tcp.flag_txt))
+                                        self.p.tcp.flags_hex,
+                                        self.p.tcp.flags_txt))
 
     def _display_udp_data(self):
         print("{0}[+] UDP {1:.>27} -> {2}".format(self.i,
@@ -90,9 +90,9 @@ class OutputToScreen(OutputMethod):
     def _display_icmp_data(self):
         print("{0}[+] ICMP {1:.>27} -> {2: <15} | "
               "Type: {3}".format(self.i,
-                                 self.p.ipv4.source,
-                                 self.p.ipv4.dest,
-                                 self.p.icmp.type_txt))
+                                 self.p.ipv4.sre,
+                                 self.p.ipv4.dst,
+                                 self.p.icmpv4.type_name))
 
     def _display_packet_contents(self):
         if self.display_data is True:
