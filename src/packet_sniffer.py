@@ -95,4 +95,4 @@ if __name__ == "__main__":
     )
     _args = parser.parse_args()
 
-    PacketSniffer(_args.interface).execute(_args.display_data)
+    PacketSniffer().execute(_args.display_data, interface=_args.interface)
