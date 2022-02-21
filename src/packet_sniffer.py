@@ -5,10 +5,11 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 
 import itertools
 from socket import PF_PACKET, SOCK_RAW, ntohs, socket
-from typing import Generator
+from typing import Iterator
 
-import src.protocols as protocols
 from src.output import OutputToScreen
+
+import netprotocols
 
 
 class Decoder:
@@ -18,24 +19,25 @@ class Decoder:
         :param interface: Interface from which packets will be captured
             and decoded.
         """
-        self._interface = interface
+        self.interface = interface
         self.data = None
         self.protocol_queue = ["Ethernet"]
+        self.packet_num: int = 0
 
-    def execute(self) -> Generator:
+    def listen(self) -> Iterator:
         """Yields a decoded packet as an instance of Protocol."""
         with socket(PF_PACKET, SOCK_RAW, ntohs(0x0003)) as sock:
-            if self._interface is not None:
-                sock.bind((self._interface, 0))
+            if self.interface is not None:
+                sock.bind((self.interface, 0))
             for self.packet_num in itertools.count(1):
                 raw_packet = sock.recv(9000)
                 start = 0
                 for proto in self.protocol_queue:
-                    proto_class = getattr(protocols, proto)
+                    proto_class = getattr(netprotocols, proto)
                     end = start + proto_class.header_len
-                    protocol = proto_class(raw_packet[start:end])
+                    protocol = proto_class.decode(raw_packet[start:end])
                     setattr(self, proto.lower(), protocol)
-                    if protocol.encapsulated_proto is None:
+                    if protocol.encapsulated_proto in (None, "undefined"):
                         break
                     self.protocol_queue.append(protocol.encapsulated_proto)
                     start = end
