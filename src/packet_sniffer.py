@@ -47,15 +47,10 @@ class Decoder:
 
 
 class PacketSniffer:
-    def __init__(self, interface: str):
+    def __init__(self):
         """Monitor a network interface for incoming data, decode it and
-        send to pre-defined output methods.
-
-        :param interface: Interface from which packets will be captured
-            and decoded.
-        """
+        send to pre-defined output methods."""
         self._observers = list()
-        self._decoder = Decoder(interface)
 
     def register(self, observer) -> None:
         """Register an observer for processing/output of decoded
@@ -66,12 +61,18 @@ class PacketSniffer:
         """Send a decoded packet to all registered observers."""
         [observer.update(*args, **kwargs) for observer in self._observers]
 
-    def execute(self, display_data: bool) -> None:
+    def execute(self, display_data: bool, *, interface: str) -> None:
+        """Start the packet sniffer.
+
+        :param display_data: Output packet data during capture.
+        :param interface: Interface from which packets will be captured
+            and decoded.
+        """
         OutputToScreen(subject=self, display_data=display_data)
         try:
             print("\n[>>>] Packet Sniffer initialized. Waiting for incoming "
                   "data. Press Ctrl-C to abort...\n")
-            [self._notify_all(packet) for packet in self._decoder.execute()]
+            [self._notify_all(packet) for packet in Decoder(interface).listen()]
         except KeyboardInterrupt:
             raise SystemExit("Aborting packet capture...")
 
