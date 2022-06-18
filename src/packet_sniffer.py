@@ -5,6 +5,7 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 
 import itertools
 from socket import PF_PACKET, SOCK_RAW, ntohs, socket
+import time
 from typing import Iterator
 
 from src.output import OutputToScreen
@@ -14,34 +15,58 @@ import netprotocols
 
 class Decoder:
     def __init__(self, interface: str):
-        """Decodes packets incoming from a given interface.
+        """Decode Ethernet frames incoming from a given interface.
 
-        :param interface: Interface from which packets will be captured
+        :param interface: Interface from which frames will be captured
             and decoded.
         """
         self.interface = interface
         self.data = None
         self.protocol_queue = ["Ethernet"]
         self.packet_num: int = 0
+        self.frame_length: int = 0
+        self.epoch_time: float = 0
 
-    def listen(self) -> Iterator:
-        """Yields a decoded packet as an instance of Protocol."""
+    def _bind_interface(self, sock: socket):
+        """Bind the socket to a given interface's address, if any.
+
+        :param sock: A socket object whose methods implement the various
+        socket system calls.
+        """
+        if self.interface is not None:
+            sock.bind((self.interface, 0))
+
+    def _attach_protocols(self, frame: bytes):
+        """Dynamically attach protocols as instance attributes.
+
+        A given frame containing Ethernet, IP and TCP protocols, for
+        example, will be decoded and the present instance will contain
+        the attributes self.ethernet, self.ip and self.tcp, all of which
+        are, by themselves, instances of netprotocols.Protocol.
+
+        :param frame: A sequence of bytes representing the data received
+            from a socket object.
+        """
+        start = end = 0
+        for proto in self.protocol_queue:
+            proto_class = getattr(netprotocols, proto)
+            end: int = start + proto_class.header_len
+            protocol = proto_class.decode(frame[start:end])
+            setattr(self, proto.lower(), protocol)
+            if protocol.encapsulated_proto in (None, "undefined"):
+                break
+            self.protocol_queue.append(protocol.encapsulated_proto)
+            start = end
+        self.data = frame[end:]
+
+    def execute(self) -> Iterator:
+        """Decode Ethernet frames arriving from a given interface."""
         with socket(PF_PACKET, SOCK_RAW, ntohs(0x0003)) as sock:
-            if self.interface is not None:
-                sock.bind((self.interface, 0))
+            self._bind_interface(sock)
             for self.packet_num in itertools.count(1):
-                raw_packet = sock.recv(9000)
-                start = 0
-                for proto in self.protocol_queue:
-                    proto_class = getattr(netprotocols, proto)
-                    end = start + proto_class.header_len
-                    protocol = proto_class.decode(raw_packet[start:end])
-                    setattr(self, proto.lower(), protocol)
-                    if protocol.encapsulated_proto in (None, "undefined"):
-                        break
-                    self.protocol_queue.append(protocol.encapsulated_proto)
-                    start = end
-                self.data = raw_packet[end:]
+                self.frame_length = len(frame := sock.recv(9000))
+                self.epoch_time = time.time_ns() / (10 ** 9)
+                self._attach_protocols(frame)
                 yield self
                 del self.protocol_queue[1:]
 
