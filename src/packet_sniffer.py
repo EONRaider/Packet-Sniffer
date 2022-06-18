@@ -54,11 +54,15 @@ class PacketSniffer:
 
     def register(self, observer) -> None:
         """Register an observer for processing/output of decoded
-        packets."""
+        frames.
+
+        :param observer: Any object that implements the interface
+        defined by the output.OutputMethod abstract base-class."""
         self._observers.append(observer)
 
     def _notify_all(self, *args, **kwargs) -> None:
-        """Send a decoded packet to all registered observers."""
+        """Send a decoded frame to all registered observers for further
+        processing/output."""
         [observer.update(*args, **kwargs) for observer in self._observers]
 
     def execute(self, display_data: bool, *, interface: str) -> None:
