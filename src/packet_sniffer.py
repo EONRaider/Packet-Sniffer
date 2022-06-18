@@ -96,14 +96,19 @@ if __name__ == "__main__":
         "-i", "--interface",
         type=str,
         default=None,
-        help="Interface from which packets will be captured (monitors all "
-             "available interfaces by default)."
+        help="Interface from which Ethernet frames will be captured (monitors "
+             "all available interfaces by default)."
     )
     parser.add_argument(
-        "-d", "--display-data",
+        "-d", "--data",
         action="store_true",
         help="Output packet data during capture."
     )
     _args = parser.parse_args()
 
-    PacketSniffer().execute(_args.display_data, interface=_args.interface)
+    OutputToScreen(
+        subject=(sniffer := PacketSniffer()),
+        display_data=_args.data
+    )
+
+    sniffer.listen_forever(_args.interface)
