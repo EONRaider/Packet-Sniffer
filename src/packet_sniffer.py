@@ -79,6 +79,14 @@ class PacketSniffer:
         except KeyboardInterrupt:
             raise SystemExit("Aborting packet capture...")
 
+    def listen_forever(self, interface: str) -> None:
+        """Utility method that iterates through captured frames on an
+        infinite cycle, allowing registered observers to be continuously
+        updated while handling the control of processing/output of
+        captured data."""
+        for _ in self.listen(interface):
+            pass
+
 
 if __name__ == "__main__":
     import argparse
