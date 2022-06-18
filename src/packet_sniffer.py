@@ -65,18 +65,17 @@ class PacketSniffer:
         processing/output."""
         [observer.update(*args, **kwargs) for observer in self._observers]
 
-    def execute(self, display_data: bool, *, interface: str) -> None:
-        """Start the packet sniffer.
+    def listen(self, interface: str) -> Iterator:
+        """Directly output a captured Ethernet frame while
+        simultaneously notifying all registered observers, if any.
 
-        :param display_data: Output packet data during capture.
-        :param interface: Interface from which packets will be captured
-            and decoded.
+        :param interface: Interface from which a given frame will be
+            captured and decoded.
         """
-        OutputToScreen(subject=self, display_data=display_data)
         try:
-            print("\n[>>>] Packet Sniffer initialized. Waiting for incoming "
-                  "data. Press Ctrl-C to abort...\n")
-            [self._notify_all(packet) for packet in Decoder(interface).listen()]
+            for frame in Decoder(interface).execute():
+                self._notify_all(frame)
+                yield frame
         except KeyboardInterrupt:
             raise SystemExit("Aborting packet capture...")
 
