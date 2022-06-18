@@ -13,8 +13,9 @@ A Network Packet Sniffer developed in Python 3. Packets are disassembled
 as they arrive at a given network interface controller and their information
 is displayed on the screen.
 
-This application maintains no dependencies on third-party modules and can be
-run by any Python 3.6+ interpreter.
+This application depends exclusively on the [NETProtocols](https://github.com/EONRaider/NETProtocols) 
+library (also developed and maintained by [EONRaider](https://github.com/EONRaider)) 
+from version 2.0.0 and above and can be run by any Python 3.6+ interpreter.
 
 ## Demo
 ![demo](https://github.com/EONRaider/static/blob/02a36787c0c2253e26c0e934b7c57a54181ccd55/packet-sniffer/demo.gif)
@@ -42,16 +43,17 @@ user@host:~/Packet-Sniffer$ python3 build.py
 ```
 
 ### III. (Optional) Development Mode
-It's also possible to run the application *without any third-party dependencies or 
-manipulation of binaries.* Simply clone this repository with `git clone` and execute 
-the `packet_sniffer.py` file by passing the required `PYTHONPATH` to `sudo`.
+It's also possible to run the application without manipulation of binaries. Simply clone 
+this repository with `git clone`, install the dependencies and execute the `packet_sniffer.py` 
+file by passing the required `PYTHONPATH` to `sudo`.
 ```shell
 user@host:~$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 user@host:~$ cd Packet-Sniffer
+user@host:~/Packet-Sniffer$ poetry install <--or--> pip install -r requirements.txt
 user@host:~/Packet-Sniffer$ sudo --preserve-env PYTHONPATH=$(pwd) python3 src/packet_sniffer.py
 ```
 *Why the black magic with `sudo`? The command is required due to the use of `socket.SOCK_RAW`. 
-The `--preserve-env` option is required because the `src` module is only visible from the 
+The `--preserve-env` option is also required because the `src` module is only visible from the 
 root directory of the project and, hence, `PYTHONPATH` must be manipulated accordingly. This 
 is not a result of the design of the tool itself, but of the way Python works internally.*
 

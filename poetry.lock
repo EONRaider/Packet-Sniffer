@@ -26,6 +26,14 @@ python-versions = "*"
 altgraph = ">=0.15"
 
 [[package]]
+name = "netprotocols"
+version = "0.3.0"
+description = "Low-level implementations of common networking protocols"
+category = "main"
+optional = false
+python-versions = ">=3.6,<4.0"
+
+[[package]]
 name = "pefile"
 version = "2021.9.3"
 description = "Python PE parsing module"
@@ -38,7 +46,7 @@ future = "*"
 
 [[package]]
 name = "pyinstaller"
-version = "4.7"
+version = "4.9"
 description = "PyInstaller bundles a Python application and all its dependencies into a single package."
 category = "main"
 optional = false
@@ -57,11 +65,11 @@ hook_testing = ["pytest (>=2.7.3)", "execnet (>=1.5.0)", "psutil"]
 
 [[package]]
 name = "pyinstaller-hooks-contrib"
-version = "2021.4"
+version = "2022.2"
 description = "Community maintained hooks for PyInstaller"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 
 [[package]]
 name = "pywin32-ctypes"
@@ -74,7 +82,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.9,<3.11"
-content-hash = "820c1682f06a69cfb317a55546e480e551067f3f46ea21c04ebd296da2e70806"
+content-hash = "353b430cb432a57e95c25ef967934023b6aa746440a4d6b98a42195d6519a935"
 
 [metadata.files]
 altgraph = [
@@ -88,23 +96,29 @@ macholib = [
     {file = "macholib-1.15.2-py2.py3-none-any.whl", hash = "sha256:885613dd02d3e26dbd2b541eb4cc4ce611b841f827c0958ab98656e478b9e6f6"},
     {file = "macholib-1.15.2.tar.gz", hash = "sha256:1542c41da3600509f91c165cb897e7e54c0e74008bd8da5da7ebbee519d593d2"},
 ]
+netprotocols = [
+    {file = "netprotocols-0.3.0-py3-none-any.whl", hash = "sha256:345f8681c94cddf806db2e436bd594ad4586ca331a4c622b221935cc79175f5b"},
+    {file = "netprotocols-0.3.0.tar.gz", hash = "sha256:5cd6a6dfafe1f307b88575988abd9125f456eda2a03276d0c954122e0075bfd3"},
+]
 pefile = [
     {file = "pefile-2021.9.3.tar.gz", hash = "sha256:344a49e40a94e10849f0fe34dddc80f773a12b40675bf2f7be4b8be578bdd94a"},
 ]
 pyinstaller = [
-    {file = "pyinstaller-4.7-py3-none-macosx_10_13_universal2.whl", hash = "sha256:0f488407108dd4e0531576552514889b2d5620367c81a177dfbe1eb628ad7a8c"},
-    {file = "pyinstaller-4.7-py3-none-manylinux2014_aarch64.whl", hash = "sha256:5a130e2cf694975787026db1839b53c833b8d4922d850703c7076a06774cb6af"},
-    {file = "pyinstaller-4.7-py3-none-manylinux2014_i686.whl", hash = "sha256:fea70754a8cdca04763d0cdbbb9b8b07854355232c8f512bc7211e2c07361c06"},
-    {file = "pyinstaller-4.7-py3-none-manylinux2014_x86_64.whl", hash = "sha256:03636feec822de1d23d9753054f0b1229fb23d58723ae796f41b1127fc54f572"},
-    {file = "pyinstaller-4.7-py3-none-musllinux_1_1_aarch64.whl", hash = "sha256:c766e1d643f8820fe70d12c3690911bc43556ae97e12885e2925fa43bc1e7649"},
-    {file = "pyinstaller-4.7-py3-none-musllinux_1_1_x86_64.whl", hash = "sha256:ba410e9aadae61aa9172d56180ca381b3ad7abd721a31495db21cc82ede4003b"},
-    {file = "pyinstaller-4.7-py3-none-win32.whl", hash = "sha256:7942ac8043e538422fe9c6733fe201e4d765d31ad13ff40bcc7b9bf4c2d0ad64"},
-    {file = "pyinstaller-4.7-py3-none-win_amd64.whl", hash = "sha256:c8d3b4e64b0e6c1c837b5215077675796a7d95679245b40843343d647465fb69"},
-    {file = "pyinstaller-4.7.tar.gz", hash = "sha256:2c7f4810dc5272ec1b388a7f1ff6b56d38653c1b0c9ac2d9dd54fa06b590e372"},
+    {file = "pyinstaller-4.9-py3-none-macosx_10_13_universal2.whl", hash = "sha256:e2f165cea4470ce8a8349112cd78f48a61413805adc17792a91997a11cfe1d80"},
+    {file = "pyinstaller-4.9-py3-none-manylinux2014_aarch64.whl", hash = "sha256:24035eb9fffa2e3e288b4c1c9710043819efc7203cae5c8c573bec16f4a8e98f"},
+    {file = "pyinstaller-4.9-py3-none-manylinux2014_i686.whl", hash = "sha256:a0b988cfc197d40e3d773b3aa1c7d3e918fc0933b4c15ec3fc5d156f222d82cb"},
+    {file = "pyinstaller-4.9-py3-none-manylinux2014_ppc64le.whl", hash = "sha256:62c97cbbdbee30974d607eb1de9afb081eb3adba787c203b00438e21027b829b"},
+    {file = "pyinstaller-4.9-py3-none-manylinux2014_s390x.whl", hash = "sha256:7f46ab11ec986e4c525b93251063144e12d432a132dbc0070e3030e34c76537a"},
+    {file = "pyinstaller-4.9-py3-none-manylinux2014_x86_64.whl", hash = "sha256:b5f1a94150315ea75bf3501be6c8476d65a7209580bb662da06dbdbc4454f375"},
+    {file = "pyinstaller-4.9-py3-none-musllinux_1_1_aarch64.whl", hash = "sha256:ebeb87cdbadb2b4e8f991ffd9945ebd4fb3a7303180e63682c3e1ce01b3fdd22"},
+    {file = "pyinstaller-4.9-py3-none-musllinux_1_1_x86_64.whl", hash = "sha256:59372b950d176fdc5ecea29719a8ab3f194b73a15b7f9875ac2a1de9a3daf5ed"},
+    {file = "pyinstaller-4.9-py3-none-win32.whl", hash = "sha256:ec3ca331d565ffca1b6470c5aaf798885a03708c3d0b15c1b19009126f84c1d4"},
+    {file = "pyinstaller-4.9-py3-none-win_amd64.whl", hash = "sha256:bec57b3b2b6178907255557ec0fc4b5ce5a0474013414cdadea853205c74ed26"},
+    {file = "pyinstaller-4.9.tar.gz", hash = "sha256:75a180a658871bc41f9cf94b6f90ffa54e98f5d6a7cdb02d7530f0360afe24f9"},
 ]
 pyinstaller-hooks-contrib = [
-    {file = "pyinstaller-hooks-contrib-2021.4.tar.gz", hash = "sha256:775b52200b39e12c95cc24f809eb050a97110fee819d178ebfde214f0f51e5f4"},
-    {file = "pyinstaller_hooks_contrib-2021.4-py2.py3-none-any.whl", hash = "sha256:60a57e4057fa2183bbaa81f10401a27eb7dd701ef8a11b287bb6345b571f94e7"},
+    {file = "pyinstaller-hooks-contrib-2022.2.tar.gz", hash = "sha256:ab1d14fe053016fff7b0c6aea51d980bac6d02114b04063b46ef7dac70c70e1e"},
+    {file = "pyinstaller_hooks_contrib-2022.2-py2.py3-none-any.whl", hash = "sha256:7605e440ccb55904cb2a87d72e83642ef176fb7030c77e52ac4d9679bb3d1537"},
 ]
 pywin32-ctypes = [
     {file = "pywin32-ctypes-0.2.0.tar.gz", hash = "sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942"},
