@@ -93,11 +93,26 @@ class OutputToScreen(OutputMethod):
             print(f"{self.i}[+] ARP Who has {arp.tpa:.>18} ? -> Tell {arp.spa}")
         else:              # ARP Reply
             print(f"{self.i}[+] ARP {arp.spa:.>28} -> Is at {arp.sha}")
+        print(f"{2 * self.i}  Hardware Type: {arp.htype}")
+        print(f"{2 * self.i}  Protocol Type: {arp.ptype_str} "
+              f"({arp.ptype_hex_str})")
+        print(f"{2 * self.i}  Hardware Length: {arp.hlen}")
+        print(f"{2 * self.i}  Protocol Length: {arp.plen}")
+        print(f"{2 * self.i}  Operation: {arp.oper} ({arp.oper_str})")
+        print(f"{2 * self.i}  Sender Hardware Address: {arp.sha}")
+        print(f"{2 * self.i}  Sender Protocol Address: {arp.spa}")
+        print(f"{2 * self.i}  Target Hardware Address: {arp.tha}")
+        print(f"{2 * self.i}  Target Protocol Address: {arp.tpa}")
 
     def _display_tcp_data(self) -> None:
         tcp = self._frame.tcp
-        print(f"{self.i}[+] TCP {tcp.sport:.>28} -> {tcp.dport: <15} | "
-              f"Flags: {tcp.flags_hex_str} > {tcp.flags_str}")
+        print(f"{self.i}[+] TCP {tcp.sport:.>28} -> {tcp.dport: <15}")
+        print(f"{2 * self.i}  Sequence Number: {tcp.seq}")
+        print(f"{2 * self.i}  ACK Number: {tcp.ack}")
+        print(f"{2 * self.i}  Flags: {tcp.flags_hex_str} > {tcp.flags_str}")
+        print(f"{2 * self.i}  Window Size: {tcp.window}")
+        print(f"{2 * self.i}  Checksum: {tcp.chksum_hex_str}")
+        print(f"{2 * self.i}  Urgent Pointer: {tcp.urg}")
 
     def _display_udp_data(self) -> None:
         udp = self._frame.udp
