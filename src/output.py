@@ -64,28 +64,28 @@ class OutputToScreen(OutputMethod):
         epoch_time: float = self._frame.epoch_time
         print(f"{self.i}[+] Ethernet {ethernet.src:.>23} -> {ethernet.dst}")
         print(f"{2 * self.i}  Interface: {interface}")
-        print(f"{2 * self.i}  Frame length: {frame_length}")
-        print(f"{2 * self.i}  Epoch time: {epoch_time}")
+        print(f"{2 * self.i}  Frame Length: {frame_length}")
+        print(f"{2 * self.i}  Epoch Time: {epoch_time}")
 
     def _display_ipv4_data(self) -> None:
         ipv4 = self._frame.ipv4
         print(f"{self.i}[+] IPv4 {ipv4.src:.>27} -> {ipv4.dst: <15}")
         print(f"{2 * self.i}  DSCP: {ipv4.dscp}")
-        print(f"{2 * self.i}  Total length: {ipv4.len}")
+        print(f"{2 * self.i}  Total Length: {ipv4.len}")
         print(f"{2 * self.i}  ID: {ipv4.id}")
         print(f"{2 * self.i}  Flags: {ipv4.flags_str}")
         print(f"{2 * self.i}  TTL: {ipv4.ttl}")
         print(f"{2 * self.i}  Protocol: {ipv4.encapsulated_proto}")
-        print(f"{2 * self.i}  Header checksum: {ipv4.chksum_hex_str}")
+        print(f"{2 * self.i}  Header Checksum: {ipv4.chksum_hex_str}")
 
     def _display_ipv6_data(self) -> None:
         ipv6 = self._frame.ipv6
         print(f"{self.i}[+] IPv6 {ipv6.src:.>27} -> {ipv6.dst: <15}")
-        print(f"{2 * self.i}  Traffic class: {ipv6.tclass_hex_str}")
-        print(f"{2 * self.i}  Flow label: {ipv6.flabel_txt_str}")
-        print(f"{2 * self.i}  Payload length: {ipv6.payload_len}")
-        print(f"{2 * self.i}  Next header: {ipv6.encapsulated_proto}")
-        print(f"{2 * self.i}  Hop limit: {ipv6.hop_limit}")
+        print(f"{2 * self.i}  Traffic Class: {ipv6.tclass_hex_str}")
+        print(f"{2 * self.i}  Flow Label: {ipv6.flabel_txt_str}")
+        print(f"{2 * self.i}  Payload Length: {ipv6.payload_len}")
+        print(f"{2 * self.i}  Next Header: {ipv6.encapsulated_proto}")
+        print(f"{2 * self.i}  Hop Limit: {ipv6.hop_limit}")
 
     def _display_arp_data(self) -> None:
         arp = self._frame.arp
