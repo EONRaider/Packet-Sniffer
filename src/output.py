@@ -120,11 +120,21 @@ class OutputToScreen(OutputMethod):
         print(f"{2 * self.i}  Header Length: {udp.len}")
         print(f"{2 * self.i}  Header Checksum: {udp.chksum}")
 
-    def _display_icmp_data(self) -> None:
+    def _display_icmpv4_data(self) -> None:
         ipv4 = self._frame.ipv4
         icmpv4 = self._frame.icmpv4
-        print(f"{self.i}[+] ICMP {ipv4.sre:.>27} -> {ipv4.dst: <15} | "
-              f"Type: {icmpv4.type_name}")
+        print(f"{self.i}[+] ICMPv4 {ipv4.src:.>27} -> {ipv4.dst: <15}")
+        print(f"{2 * self.i}  ICMP Type: {icmpv4.type} ({icmpv4.type_str})")
+        print(f"{2 * self.i}  Header Checksum: {icmpv4.chksum_hex_str}")
+
+    def _display_icmpv6_data(self) -> None:
+        ipv6 = self._frame.ipv6
+        icmpv6 = self._frame.icmpv6
+        print(f"{self.i}[+] ICMPv6 {ipv6.src:.>27} -> {ipv6.dst: <15}")
+        print(f"{2 * self.i}  Control Message Type: {icmpv6.type} "
+              f"({icmpv6.type_str})")
+        print(f"{2 * self.i}  Control Message Subtype: {icmpv6.code}")
+        print(f"{2 * self.i}  Header Checksum: {icmpv6.chksum_hex_str}")
 
     def _display_packet_contents(self) -> None:
         if self._display_data is True:
