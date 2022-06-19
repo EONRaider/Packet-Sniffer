@@ -117,6 +117,8 @@ class OutputToScreen(OutputMethod):
     def _display_udp_data(self) -> None:
         udp = self._frame.udp
         print(f"{self.i}[+] UDP {udp.sport:.>28} -> {udp.dport}")
+        print(f"{2 * self.i}  Header Length: {udp.len}")
+        print(f"{2 * self.i}  Header Checksum: {udp.chksum}")
 
     def _display_icmp_data(self) -> None:
         ipv4 = self._frame.ipv4
