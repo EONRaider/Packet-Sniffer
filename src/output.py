@@ -54,7 +54,10 @@ class OutputToScreen(OutputMethod):
         """Iterate through a protocol queue and call the appropriate
         display protocol method."""
         for proto in self._frame.protocol_queue:
-            getattr(self, f"_display_{proto.lower()}_data")()
+            try:
+                getattr(self, f"_display_{proto.lower()}_data")()
+            except AttributeError:
+                print(f"{'':>4}[+] Unknown Protocol")
 
     def _display_ethernet_data(self) -> None:
         ethernet = self._frame.ethernet
