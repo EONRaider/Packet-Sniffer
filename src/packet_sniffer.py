@@ -49,7 +49,10 @@ class Decoder:
         """
         start = end = 0
         for proto in self.protocol_queue:
-            proto_class = getattr(netprotocols, proto)
+            try:
+                proto_class = getattr(netprotocols, proto)
+            except AttributeError:
+                continue
             end: int = start + proto_class.header_len
             protocol = proto_class.decode(frame[start:end])
             setattr(self, proto.lower(), protocol)
@@ -60,7 +63,6 @@ class Decoder:
         self.data = frame[end:]
 
     def execute(self) -> Iterator:
-        """Decode Ethernet frames arriving from a given interface."""
         with socket(PF_PACKET, SOCK_RAW, ntohs(0x0003)) as sock:
             self._bind_interface(sock)
             for self.packet_num in itertools.count(1):
@@ -82,7 +84,7 @@ class PacketSniffer:
         frames.
 
         :param observer: Any object that implements the interface
-        defined by the output.OutputMethod abstract base-class."""
+        defined by the Output abstract base-class."""
         self._observers.append(observer)
 
     def _notify_all(self, *args, **kwargs) -> None:
