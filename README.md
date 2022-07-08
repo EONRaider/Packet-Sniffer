@@ -18,40 +18,36 @@ library (also developed and maintained by [EONRaider](https://github.com/EONRaid
 from version 2.0.0 and above and can be run by any Python 3.8+ interpreter.
 
 ## Demo
-![demo](https://user-images.githubusercontent.com/15611424/177403069-9415928b-cc9e-413e-a77c-9717a00e2413.gif)
+![sniffer_demo](https://user-images.githubusercontent.com/15611424/178045423-067df4ec-1853-400e-9b5a-10154cb6fcc1.gif)
 
 ## Running the Application
 ### I. Development Mode
-It's possible to run the application without manipulation of binaries. Simply clone
-this repository with `git clone`, install the dependencies and execute the `packet_sniffer.py`
-file by passing the required `PYTHONPATH` to `sudo`.
+Simply clone this repository with `git clone`, install the dependencies and execute the 
+`sniffer.py` file.
 ```
 user@host:~$ git clone https://github.com/EONRaider/Packet-Sniffer.git
 user@host:~$ cd Packet-Sniffer
-user@host:~/Packet-Sniffer$ pip install -r requirements.txt <--or--> poetry install
-user@host:~/Packet-Sniffer$ sudo --preserve-env PYTHONPATH=$(pwd) python3 src/packet_sniffer.py
+user@host:~/packet-sniffer$ pip install -r requirements.txt <--or--> poetry install
+user@host:~/packet-sniffer$ sudo python3 packet_sniffer/sniffer.py
 ```
 
-*Why the black magic with `sudo`? The command is required due to the use of `socket.SOCK_RAW`,
-which needs administrative privileges to run on GNU/Linux.
-The `--preserve-env` option is also required because the `src` module is only visible from the
-root directory of the project and, hence, `PYTHONPATH` must be manipulated accordingly. This
-is not a result of the design of the tool itself, but of the way Python works internally. Notice
+*The `sudo` command is required due to the use of `socket.SOCK_RAW`,
+which needs administrative privileges to run on GNU/Linux. Notice
 that the existence of dependencies may require the execution of the interpreter contained in
-the virtual environment in which the dependencies have been installed, instead of just
-using the system interpreter.*
+the virtual environment in which the dependencies have been installed (if you use one),
+instead of just using the system interpreter.*
 
 ### II. (Optional) Build the binary
 Use the `build.py` file to compile your own binary with the `PyInstaller` package. You just need to install all dependencies and build. 
 Dependency management works with both [Poetry](https://python-poetry.org/) (recommended) and [Virtualenv](https://virtualenv.pypa.io/en/latest/). 
 ```
 <-- Install dependencies as shown above in Step I -->
-user@host:~/Packet-Sniffer$ python3 build.py
+user@host:~/packet-sniffer$ python3 build.py
 ```
 
 ## Usage
 ```
-packet_sniffer.py [-h] [-i INTERFACE] [-d]
+sniffer.py [-h] [-i INTERFACE] [-d]
 
 Network Packet Sniffer
 
