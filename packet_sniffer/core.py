@@ -4,11 +4,9 @@
 __author__ = "EONRaider @ keybase.io/eonraider"
 
 import itertools
-from socket import PF_PACKET, SOCK_RAW, ntohs, socket
 import time
+from socket import PF_PACKET, SOCK_RAW, ntohs, socket
 from typing import Iterator
-
-from src.output import OutputToScreen
 
 import netprotocols
 
@@ -99,43 +97,6 @@ class PacketSniffer:
         :param interface: Interface from which a given frame will be
             captured and decoded.
         """
-        try:
-            for frame in Decoder(interface).execute():
-                self._notify_all(frame)
-                yield frame
-        except KeyboardInterrupt:
-            raise SystemExit("Aborting packet capture...")
-
-    def listen_forever(self, interface: str) -> None:
-        """Utility method that iterates through captured frames on an
-        infinite cycle, allowing registered observers to be continuously
-        updated while handling the control of processing/output of
-        captured data."""
-        for _ in self.listen(interface):
-            pass
-
-
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(description="Network packet sniffer")
-    parser.add_argument(
-        "-i", "--interface",
-        type=str,
-        default=None,
-        help="Interface from which Ethernet frames will be captured (monitors "
-             "all available interfaces by default)."
-    )
-    parser.add_argument(
-        "-d", "--data",
-        action="store_true",
-        help="Output packet data during capture."
-    )
-    _args = parser.parse_args()
-
-    OutputToScreen(
-        subject=(sniffer := PacketSniffer()),
-        display_data=_args.data
-    )
-
-    sniffer.listen_forever(_args.interface)
+        for frame in Decoder(interface).execute():
+            self._notify_all(frame)
+            yield frame

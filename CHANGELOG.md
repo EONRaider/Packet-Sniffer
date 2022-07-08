@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2022-07-08
+- The application was restructured for ease of use. The new layout dispenses with 
+the need of passing the PYTHONPATH environment variable to `sudo` during execution.
+- Updates were made to the documentation and requirements files.
+
 ## [2.0.1] - 2022-07-05
 - Updated the README.md file to include the dependency on NETProtocols.
 - Added support for ICMPv4 and ICMPv6.
