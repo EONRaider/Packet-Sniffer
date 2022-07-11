@@ -1,13 +1,14 @@
 [tool.poetry]
-name = "packet-sniffer"
-version = "2.0.1"
+name = "net-sniffer"
+version = "3.0.0"
 description = "A Network Packet Sniffing tool developed in Python 3"
 authors = ["EONRaider <livewire_voodoo@protonmail.com>"]
+repository = "https://github.com/EONRaider/Packet-Sniffer"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.11"
-pyinstaller = "^5.1"
 netprotocols = "^0.5.0"
+pyinstaller = { version = "^5.1", optional = true }
 
 [tool.poetry.dev-dependencies]
 
