@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from core import PacketSniffer
+from core_sniffer import PacketSniffer
 from output import OutputToScreen
 
 
