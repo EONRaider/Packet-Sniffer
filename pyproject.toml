@@ -8,7 +8,6 @@ repository = "https://github.com/EONRaider/Packet-Sniffer"
 [tool.poetry.dependencies]
 python = ">=3.8,<3.11"
 netprotocols = "^0.5.0"
-pyinstaller = { version = "^5.1", optional = true }
 
 [tool.poetry.dev-dependencies]
 
