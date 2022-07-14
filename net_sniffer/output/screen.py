@@ -4,20 +4,8 @@
 __author__ = "EONRaider @ keybase.io/eonraider"
 
 import time
-from abc import ABC, abstractmethod
 
-
-class Output(ABC):
-    """Interface for the implementation of all classes responsible for
-    further processing/output of the information gathered by the
-    PacketSniffer class."""
-
-    def __init__(self, subject):
-        subject.register(self)
-
-    @abstractmethod
-    def update(self, *args, **kwargs):
-        pass
+from net_sniffer.output.base import Output
 
 
 i = " " * 4  # Basic indentation level
