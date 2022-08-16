@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0] - XXXX-XX-XX
+## [3.1.0] - 2022-08-16
+- Bump to minor version to prevent conflicts in dependency resolution when using
+Poetry
+
+## [3.0.0] - 2022-07-14
 - The Packet Sniffer is now available as a library on PyPI under the name "net-sniffer".
 - Changes were made to the application's structure to allow the correct namespaces 
 when importing.
