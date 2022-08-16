@@ -1,6 +1,6 @@
 [[package]]
 name = "netprotocols"
-version = "0.5.0"
+version = "0.6.0"
 description = "Low-level implementations of common networking protocols"
 category = "main"
 optional = false
@@ -9,10 +9,10 @@ python-versions = ">=3.7,<4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.11"
-content-hash = "842b8805618fba472af068bceaf933cf5f0bef1dfa4d965c9f1955a324c2aead"
+content-hash = "eb12f9d95f0917833d10e04eeb307155d9a877f5f690388e2f5f0acabde3fd0c"
 
 [metadata.files]
 netprotocols = [
-    {file = "netprotocols-0.5.0-py3-none-any.whl", hash = "sha256:8ad5164d859c3002b5142e377f488240e0fa8e7a599bd5da65934ae8274f944b"},
-    {file = "netprotocols-0.5.0.tar.gz", hash = "sha256:d3af524bfff50ac279e0dac08f13eefbb86db34be5c39af4204d271a1f6aceb3"},
+    {file = "netprotocols-0.6.0-py3-none-any.whl", hash = "sha256:2df63d562dce065524ec1bbee2dcdb02b2e2d5af6424b0bd895e5d6c56a15583"},
+    {file = "netprotocols-0.6.0.tar.gz", hash = "sha256:72e5e4bd51b5d3f59db3d584d0f6ed924d6cbf8b6138a8ae9f4c30ec1b2b2a22"},
 ]
