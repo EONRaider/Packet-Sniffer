@@ -65,7 +65,7 @@ class Decoder:
             self._bind_interface(sock)
             for self.packet_num in itertools.count(1):
                 self.frame_length = len(frame := sock.recv(9000))
-                self.epoch_time = time.time_ns() / (10 ** 9)
+                self.epoch_time = time.time_ns() / (10**9)
                 self._attach_protocols(frame)
                 yield self
                 del self.protocol_queue[1:]

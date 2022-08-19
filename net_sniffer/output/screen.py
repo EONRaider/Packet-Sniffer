@@ -26,8 +26,10 @@ class OutputToScreen(Output):
 
     @staticmethod
     def _initialize() -> None:
-        print("\n[>>>] Packet Sniffer initialized. Waiting for incoming "
-              "data. Press Ctrl-C to abort...\n")
+        print(
+            "\n[>>>] Packet Sniffer initialized. Waiting for incoming "
+            "data. Press Ctrl-C to abort...\n"
+        )
 
     def update(self, frame) -> None:
         self._frame = frame
@@ -50,8 +52,9 @@ class OutputToScreen(Output):
 
     def _display_ethernet_data(self) -> None:
         ethernet = self._frame.ethernet
-        interface = "all" if self._frame.interface is None \
-            else self._frame.interface
+        interface = (
+            "all" if self._frame.interface is None else self._frame.interface
+        )
         frame_length: int = self._frame.frame_length
         epoch_time: float = self._frame.epoch_time
         print(f"{i}[+] Ethernet {ethernet.src:.>23} -> {ethernet.dst}")
@@ -83,11 +86,12 @@ class OutputToScreen(Output):
         arp = self._frame.arp
         if arp.oper == 1:  # ARP Request
             print(f"{i}[+] ARP Who has {arp.tpa:.>18} ? -> Tell {arp.spa}")
-        else:              # ARP Reply
+        else:  # ARP Reply
             print(f"{i}[+] ARP {arp.spa:.>28} -> Is at {arp.sha}")
         print(f"{2 * i}  Hardware Type: {arp.htype}")
-        print(f"{2 * i}  Protocol Type: {arp.ptype_str} "
-              f"({arp.ptype_hex_str})")
+        print(
+            f"{2 * i}  Protocol Type: {arp.ptype_str} " f"({arp.ptype_hex_str})"
+        )
         print(f"{2 * i}  Hardware Length: {arp.hlen}")
         print(f"{2 * i}  Protocol Length: {arp.plen}")
         print(f"{2 * i}  Operation: {arp.oper} ({arp.oper_str})")
@@ -123,14 +127,17 @@ class OutputToScreen(Output):
         ipv6 = self._frame.ipv6
         icmpv6 = self._frame.icmpv6
         print(f"{i}[+] ICMPv6 {ipv6.src:.>27} -> {ipv6.dst: <15}")
-        print(f"{2 * i}  Control Message Type: {icmpv6.type} "
-              f"({icmpv6.type_str})")
+        print(
+            f"{2 * i}  Control Message Type: {icmpv6.type} "
+            f"({icmpv6.type_str})"
+        )
         print(f"{2 * i}  Control Message Subtype: {icmpv6.code}")
         print(f"{2 * i}  Header Checksum: {icmpv6.chksum_hex_str}")
 
     def _display_packet_contents(self) -> None:
         if self._display_data is True:
             print(f"{i}[+] DATA:")
-            data = (self._frame.data.decode(errors="ignore").
-                    replace("\n", f"\n{i * 2}"))
+            data = self._frame.data.decode(errors="ignore").replace(
+                "\n", f"\n{i * 2}"
+            )
             print(f"{i}{data}")
