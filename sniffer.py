@@ -3,6 +3,6 @@
 
 __author__ = "EONRaider @ keybase.io/eonraider"
 
-from net_sniffer.app import run
+from net_sniffer import app
 
-run()
+app.run()
