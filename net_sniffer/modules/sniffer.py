@@ -27,9 +27,9 @@ class PacketSniffer:
         processing/output."""
         [observer.update(*args, **kwargs) for observer in self._observers]
 
-    def listen(self, interface: str) -> Iterator:
+    def listen(self, interface: str) -> Iterator[Decoder]:
         """Directly output a captured Ethernet frame while
-        simultaneously notifying all registered observers, if any.
+        simultaneously notifying all registered observers (if any).
 
         :param interface: Interface from which a given frame will be
             captured and decoded.
