@@ -1,5 +1,11 @@
+#!/usr/bin/env python3
+# https://github.com/EONRaider/Packet-Sniffer
+
+__author__ = "EONRaider @ keybase.io/eonraider"
+
 import argparse
 import os
+import platform
 
 from net_sniffer.modules.sniffer import PacketSniffer
 from net_sniffer.output.screen import OutputToScreen
@@ -27,10 +33,17 @@ def parse_cli_options():
 def run():
     args = parse_cli_options()
 
+    if platform.system() == "Windows":
+        raise SystemExit(
+            "Error: Unsupported OS. This application depends on calls to "
+            "socket.PF_PACKET and will only run on operating systems based "
+            "on the Linux kernel. Aborting..."
+        )
+
     if os.getuid() != 0:
         raise SystemExit(
             "Error: Permission denied. This application requires "
-            "administrator privileges to run."
+            "administrator privileges to run. Aborting..."
         )
 
     OutputToScreen(subject=(sniffer := PacketSniffer()), display_data=args.data)
