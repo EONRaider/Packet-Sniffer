@@ -3,35 +3,16 @@
 
 __author__ = "EONRaider @ keybase.io/eonraider"
 
-import argparse
 import os
 import platform
 
+from net_sniffer.cli_parser import CLIParser
 from net_sniffer.modules.sniffer import PacketSniffer
 from net_sniffer.output.screen import OutputToScreen
 
 
-def parse_cli_options():
-    parser = argparse.ArgumentParser(description="Network packet sniffer")
-    parser.add_argument(
-        "-i",
-        "--interface",
-        type=str,
-        default=None,
-        help="Interface from which Ethernet frames will be captured (monitors "
-        "all available interfaces by default).",
-    )
-    parser.add_argument(
-        "-d",
-        "--data",
-        action="store_true",
-        help="Output packet data during capture.",
-    )
-    return parser.parse_args()
-
-
 def run():
-    args = parse_cli_options()
+    args = CLIParser().parse()
 
     if platform.system() == "Windows":
         raise SystemExit(
