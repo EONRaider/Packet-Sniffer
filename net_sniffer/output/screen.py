@@ -5,13 +5,13 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 
 import time
 
-from net_sniffer.output.base import Output
+from net_sniffer.output.base import Observer
 
 
 i = " " * 4  # Basic indentation level
 
 
-class _OutputToScreen(Output):
+class _OutputToScreen(Observer):
     def __init__(self, subject, *, display_data: bool):
         """Output data from a decoded frame to screen.
 

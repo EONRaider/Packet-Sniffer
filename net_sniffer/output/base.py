@@ -6,7 +6,7 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 from abc import ABC, abstractmethod
 
 
-class Output(ABC):
+class Observer(ABC):
     """Interface for the implementation of all classes responsible for
     further processing/output of the information gathered by the
     PacketSniffer class."""
