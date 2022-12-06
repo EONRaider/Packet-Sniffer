@@ -5,7 +5,7 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 
 from typing import Iterator
 
-from net_sniffer.modules.decoder import Decoder
+from net_sniffer.modules.decoder import _Decoder
 
 
 class PacketSniffer:
@@ -27,13 +27,13 @@ class PacketSniffer:
         processing/output."""
         [observer.update(*args, **kwargs) for observer in self._observers]
 
-    def listen(self, interface: str) -> Iterator[Decoder]:
+    def listen(self, interface: str) -> Iterator[_Decoder]:
         """Directly output a captured Ethernet frame while
         simultaneously notifying all registered observers (if any).
 
         :param interface: Interface from which a given frame will be
             captured and decoded.
         """
-        for frame in Decoder(interface).execute():
+        for frame in _Decoder(interface).execute():
             self._notify_all(frame)
             yield frame

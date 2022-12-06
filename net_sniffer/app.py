@@ -6,13 +6,13 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 import os
 import platform
 
-from net_sniffer.cli_parser import CLIParser
+from net_sniffer.cli_parser import _CLIParser
 from net_sniffer.modules.sniffer import PacketSniffer
-from net_sniffer.output.screen import OutputToScreen
+from net_sniffer.output.screen import _OutputToScreen
 
 
 def run():
-    args = CLIParser().parse()
+    args = _CLIParser().parse()
 
     if platform.system() == "Windows":
         raise SystemExit(
@@ -27,7 +27,9 @@ def run():
             "administrator privileges to run. Aborting..."
         )
 
-    OutputToScreen(subject=(sniffer := PacketSniffer()), display_data=args.data)
+    _OutputToScreen(
+        subject=(sniffer := PacketSniffer()), display_data=args.data
+    )
 
     try:
         for _ in sniffer.listen(args.interface):

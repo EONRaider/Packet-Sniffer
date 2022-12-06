@@ -11,7 +11,7 @@ from typing import Iterator
 import netprotocols
 
 
-class Decoder:
+class _Decoder:
     def __init__(self, interface: str):
         """Decode Ethernet frames incoming from a given interface.
 

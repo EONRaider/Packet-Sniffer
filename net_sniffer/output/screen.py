@@ -11,7 +11,7 @@ from net_sniffer.output.base import Output
 i = " " * 4  # Basic indentation level
 
 
-class OutputToScreen(Output):
+class _OutputToScreen(Output):
     def __init__(self, subject, *, display_data: bool):
         """Output data from a decoded frame to screen.
 

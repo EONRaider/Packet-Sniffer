@@ -22,7 +22,7 @@ displays their information on screen.
 """
 
 
-class CLIParser:
+class _CLIParser:
     def __init__(self):
         self.parser = argparse.ArgumentParser(
             description=_banner,
@@ -36,7 +36,7 @@ class CLIParser:
             type=str,
             default=None,
             help="Interface from which Ethernet frames will be captured "
-                 "(monitors all available interfaces by default).",
+            "(monitors all available interfaces by default).",
         )
         self.parser.add_argument(
             "-d",
