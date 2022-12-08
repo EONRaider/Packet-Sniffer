@@ -46,17 +46,19 @@ class _Decoder:
             from a socket object.
         """
         start = end = 0
-        for proto in self.protocol_queue:
+        for protocol_name in self.protocol_queue:
             try:
-                proto_class = getattr(netprotocols, proto)
+                protocol_class = getattr(netprotocols, protocol_name)
             except AttributeError:
                 continue
-            end: int = start + proto_class.header_len
-            protocol = proto_class.decode(frame[start:end])
-            setattr(self, proto.lower(), protocol)
-            if protocol.encapsulated_proto in (None, "undefined"):
+            end: int = start + protocol_class.header_len
+            decoded_protocol: netprotocols.Protocol = protocol_class.decode(
+                frame[start:end]
+            )
+            setattr(self, protocol_name.lower(), decoded_protocol)
+            if decoded_protocol.encapsulated_proto in (None, "undefined"):
                 break
-            self.protocol_queue.append(protocol.encapsulated_proto)
+            self.protocol_queue.append(decoded_protocol.encapsulated_proto)
             start = end
         self.data = frame[end:]
 
