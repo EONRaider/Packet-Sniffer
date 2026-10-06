@@ -14,7 +14,7 @@ reporting a vulnerability in either path.
 GitHub's private vulnerability reporting isn't enabled for this
 repository, so please don't open a public issue for a suspected
 vulnerability. Email the maintainer directly instead:
-[livewire_voodoo@protonmail.com](mailto:livewire_voodoo@protonmail.com)
+[eonraider@protonmail.com](mailto:eonraider@protonmail.com)
 (the address in `pyproject.toml`'s `authors` field).
 
 Beyond what you'd put in an ordinary bug report, include:

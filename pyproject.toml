@@ -5,7 +5,7 @@ description = "RootWire: a network traffic monitor that decodes raw Ethernet fra
 readme = "README.md"
 license = "AGPL-3.0-or-later"
 license-files = ["LICENSE"]
-authors = [{ name = "EONRaider", email = "livewire_voodoo@protonmail.com" }]
+authors = [{ name = "EONRaider", email = "eonraider@protonmail.com" }]
 requires-python = ">=3.12"
 keywords = ["sniffer", "networking", "packets", "monitoring", "security"]
 classifiers = [
